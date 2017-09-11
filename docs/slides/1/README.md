@@ -7,7 +7,7 @@
 
 ---
 
-![QQ](images/qq.png) <!-- .element height="50%" width="50%" -->
+![QQ](images/qq.png)<!-- .element width="45%" height="80%" -->
 
 ---
 
@@ -118,7 +118,7 @@ James Gosling - Java之父
 
 ## 教材
 
-![thinkinginjava](https://images-cn.ssl-images-amazon.com/images/I/51t6VpLFJ6L._SX328_BO1,204,203,200_.jpg) <!-- .element height="80%" width="80%" --> 
+![thinkinginjava](https://images-cn.ssl-images-amazon.com/images/I/51t6VpLFJ6L._SX328_BO1,204,203,200_.jpg) <!-- .element height="60%" width="40%" --> 
 
 
 ---
