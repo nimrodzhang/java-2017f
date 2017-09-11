@@ -1,37 +1,28 @@
-<!-- $theme: default -->
+# Java程序设计
 
 
-Java程序设计
-===
+<small>曹春 caochun@gmail.com</small>
 
-
-<small>曹春</small>
+<small> 余萍 yuping.nju@gmail.com</small>
 
 ---
 
-<div style="text-align:center"><img src="images/qq.png" width="500">
-</div>
-
+![QQ](images/qq.png) <!-- .element height="30%" width="30%" -->
 
 ---
 
-# 课程网站
+## 课程网站
 
 
-- 仓库：https://github.com/njuics/java2017
+- 仓库：https://github.com/njuics/java-2017f
 
-- 页面： https://njuics.github.io/java2017
+- 页面： https://njuics.github.io/java-2017f
 
-<div>&nbsp</div>
-<div>&nbsp</div>
-
-
-<div align="right"><small><a href="https://github.com"><img src="https://github.com/favicon.ico" width="36" ></a><a href="https://git-scm.com">&nbsp;&nbsp; &nbsp;<img src="https://git-scm.com/favicon.ico" width="36"></a></small></div>
-
+![github](https://www.appnovation.com/sites/default/files/2016-12/github.png)<!-- .element height="30%" width="30%" --> 
 
 ---
 
-# 目录（WWW）
+## 目录（WWW）
 
 - **W**hy - 为什么要学Java？
 
@@ -41,33 +32,33 @@ Java程序设计
 
 ---
 
-# Why
+## Why
 
 ---
 
-# James Gosling - Java之父 
 
-<div style="text-align:center"><img src="images/James_Gosling.jpg" width="500">
-</div>
+![Gosling](images/James_Gosling.jpg) <!-- .element height="60%" width="60%" --> 
+
+James Gosling - Java之父 
 
 
 ---
 
-# 历史
+## 历史
 
 - 1990，Oak，家用电器等小型系统的程序语言
 - 1995，Java发布，互联网编程语言, HotJava
 
 ---
 
-# HotJava
+## HotJava
 
-<div style="text-align:center"><img src="images/hotjava.png" width="800">
-</div>
+![hotjava](images/hotjava.png) <!-- .element height="80%" width="80%" --> 
 
 ---
 
-# Java SDK
+## Java SDK
+
 
 - JDK 1.02 (1995)
 - JDK 1.1 (1996)
@@ -75,11 +66,12 @@ Java程序设计
 - Java 2 SDK v 1.3 (a.k.a JDK 1.3, 2000)
 - Java 2 SDK v 1.4 (a.k.a JDK 1.4, 2002)
 - ...
-- Java 9 SDK
+- Java 8 SDK (current) <small>http://www.oracle.com/technetwork/java/javase/downloads/index.html</small>
+- Java 9 SDK （coming ...)
 
 ---
 
-# JDK Editions
+## JDK Editions
 
 - Java Standard Edition (J2SE)
   - J2SE can be used to develop client-side standalone applications or applets.
@@ -91,24 +83,19 @@ Java程序设计
 
 ---
 
-# Java特性
+## Java特性
 
-Java is simple
-Java is object-oriented
-Java is distributed
-Java is interpreted
-Java is robust
-Java is secure
-Java is architecture-neutral
-Java is portable
-Java’s performance
-Java is multithreaded
-Java is dynamic
-
+- Simple
+- Object Oriented
+- Interpreted
+- Secure
+- Architecture-neutral
+- Portable
+- ...
 
 ---
 
-# Java IDE （Dead）
+## Java IDE （Dead）
 
 - IBM Visual Age for Java 
 - Microsoft Visual J++
@@ -117,15 +104,26 @@ Java is dynamic
 
 ---
 
-# Java IDE 
+## Java IDE
 
-- eclipse
-- IDEA by IntelliJ
+
+- NetBeans https://netbeans.org/
+
+- Eclipse http://eclipse.org/
+
+- IDEA by IntelliJ https://www.jetbrains.com/idea/
+
+---
+
+
+## 教材
+
+![thinkinginjava](https://images-cn.ssl-images-amazon.com/images/I/51t6VpLFJ6L._SX328_BO1,204,203,200_.jpg) <!-- .element height="80%" width="80%" --> 
 
 
 ---
 
-# Hello World
+## Hello World
 
 ```Java
 //This is my first java program. 
@@ -136,19 +134,23 @@ public class HelloWorld {
     System.out.println("Hello World!");
   }
 }
-
 ```
+
 ---
 
-# 编译
+### 编译
 
 ```bash
 javac HelloWorld.java
 ```
 
 
-# 运行
+### 运行
 
 ```bash
 java HelloWorld
 ```
+
+---
+
+# END
