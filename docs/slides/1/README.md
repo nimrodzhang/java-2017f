@@ -7,7 +7,7 @@
 
 ---
 
-![QQ](images/qq.png) <!-- .element height="30%" width="30%" -->
+![QQ](images/qq.png) <!-- .element height="50%" width="50%" -->
 
 ---
 
