@@ -143,6 +143,9 @@ public class HelloWorld {
 
 ---
 
+### 安装配置
+
+<small>https://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/</small>
 
 ### 编译
 
