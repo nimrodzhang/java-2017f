@@ -278,11 +278,15 @@ public class FindLargestSmallestNumber {
 
 ## 参考
 
-<small>Language Basics https://docs.oracle.com/javase/tutorial/java/nutsandbolts/index.html</small>
+Language Basics
+
+<small> https://docs.oracle.com/javase/tutorial/java/nutsandbolts/index.html</small>
 
 ---
 
 ## 作业
+
+<small>https://github.com/njuics/java-2017f-homework/tree/master/20170912</small>
 
 ---
 # END
