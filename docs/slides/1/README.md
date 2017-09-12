@@ -153,4 +153,36 @@ java HelloWorld
 
 ---
 
+## 上册
+
+1. Overview & Basics (`Introduction`, `Primitives`, `Operators`, `Controlling Exection`)
+2. Object Oriented （`Introdction to Objects`, `Everything is an Object`, `Initialization & Cleanup`)
+3. OO extended (`Access Control`, `Resuing Classes`)
+4. Interface (`Interfaces`, `Polymorphism`, `Inner Classes`)
+5. Desigin by Contract & UML 🚺
+
+
+---
+
+## 中册
+
+6. Exception (`Error Handling with Exceptions`) 🚺
+7. Classloading & Reflection
+8. Util (`Holding your objects`, `Strings`, `Arrays`) 🚺
+9. Type (`Type Information`, `Generic`, `Container in Depth`)
+10. `Annotations`/Testing
+11. Maven/Gradle/CI
+
+---
+
+## 下册
+
+12. `I/O` 🚺
+13. `Concurrency`
+14. `GUI` 🚺
+15. Design Pattern 🚺
+16. Components, IoC, MVC
+
+---
+
 # END
