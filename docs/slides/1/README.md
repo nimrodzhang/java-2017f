@@ -32,14 +32,11 @@
 
 ---
 
-## Why
+## Java之父
 
----
+![Gosling](images/James_Gosling.jpg) <!-- .element height="65%" width="50%" --> 
 
-
-![Gosling](images/James_Gosling.jpg) <!-- .element height="60%" width="60%" --> 
-
-James Gosling - Java之父 
+James Gosling
 
 
 ---
@@ -53,7 +50,7 @@ James Gosling - Java之父
 
 ## HotJava
 
-![hotjava](images/hotjava.png) <!-- .element height="80%" width="80%" --> 
+![hotjava](images/hotjava.png)  <!-- .element height="80%" width="80%" --> 
 
 ---
 
@@ -166,10 +163,10 @@ java HelloWorld
 
 ## 上册
 
-1. Overview & Basics (`Introduction`, `Primitives`, `Operators`, `Controlling Exection`)
-2. Object Oriented （`Introdction to Objects`, `Everything is an Object`, `Initialization & Cleanup`)
-3. OO extended (`Access Control`, `Resuing Classes`)
-4. Interface (`Interfaces`, `Polymorphism`, `Inner Classes`)
+1. 语言基础 (`Introduction`, `Primitives`, `Operators`, `Controlling Exection`)
+2. 面向对象 （`Introdction to Objects`, `Everything is an Object`, `Initialization & Cleanup`)
+3. 面向对象 (`Access Control`, `Resuing Classes`)
+4. 面向对象 (`Interfaces`, `Polymorphism`, `Inner Classes`)
 5. Desigin by Contract & UML 🚺
 
 
@@ -177,22 +174,22 @@ java HelloWorld
 
 ## 中册
 
-6. Exception (`Error Handling with Exceptions`) 🚺
-7. Classloading & Reflection
-8. Util (`Holding your objects`, `Strings`, `Arrays`) 🚺
-9. Type (`Type Information`, `Generic`, `Container in Depth`)
-10. `Annotations`/Testing
-11. Maven/Gradle/CI
+6. 异常处理 (`Error Handling with Exceptions`) 🚺
+7. 类加载和自省
+8. 工具 (`Holding your objects`, `Strings`, `Arrays`) 🚺
+9. 类型 (`Type Information`, `Generic`, `Container in Depth`)
+10. 标注和测试（`Annotations`/Testing）
+11. 工程工具（Maven/Gradle/CI）
 
 ---
 
 ## 下册
 
-12. `I/O` 🚺
-13. `Concurrency`
-14. `GUI` 🚺
-15. Design Pattern 🚺
-16. Components, IoC, MVC
+12. 输入输出（`I/O`） 🚺
+13. 并发编程（`Concurrency`）
+14. 图形化（`GUI`） 🚺
+15. 设计（Design Pattern） 🚺
+16. Java框架（Components, IoC, MVC）
 
 ---
 
