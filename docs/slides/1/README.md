@@ -95,6 +95,14 @@ James Gosling - Java之父
 
 ---
 
+## JVM
+
+![jvm](images/jvm.png)
+
+---
+
+
+
 ## Java IDE （Dead）
 
 - IBM Visual Age for Java 
@@ -138,6 +146,7 @@ public class HelloWorld {
 
 ---
 
+
 ### 编译
 
 ```bash
@@ -150,6 +159,8 @@ javac HelloWorld.java
 ```bash
 java HelloWorld
 ```
+
+![](images/compiling.gif)
 
 ---
 
