@@ -15,8 +15,8 @@
 
 
 - 仓库：https://github.com/njuics/java-2017f
-
 - 页面： https://njuics.github.io/java-2017f
+- 作业：https://github.com/njuics/java-2017f-homework
 
 ![github](https://www.appnovation.com/sites/default/files/2016-12/github.png)<!-- .element height="30%" width="30%" --> 
 
