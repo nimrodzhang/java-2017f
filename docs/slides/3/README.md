@@ -7,15 +7,15 @@
 Programming Pradigms
 
 - 命令式编程 Imperative programming
-  - Focuses on describing _how_ a program operates.
+  - Focuses on describing <span style="color:gold">_how_</span> a program operates.
 - 声明式编程 Declarative programming
-  - Focuses on _what_ the program should accomplish without specifying how the program should achieve the result.
+  - Focuses on <span style="color:gold">_what_</span> the program should accomplish without specifying how the program should achieve the result.
 
 ---
 
 ## 命令式编程
 
-原始命令式 (汇编)
+&rarr; 原始命令式 (汇编)
 
 &rarr; 过程式 (Procedural programming): Fortran, ALGOL, COBOL and BASIC
 
@@ -168,7 +168,7 @@ Object Oriented Programming in Java
 
 女娲造人
 
-![](http://imgs15.iaweg.com/pic/HTTP2ltZy56Y29vbC5jbi9jb21tdW5pdHkvMDFjNmQ0NTU0NzUyMTIwMDAwMDAyYjAxNzNjZWUxLmpwZwloglog.jpg)  <!-- .element: width="80%" -->
+![](http://imgs15.iaweg.com/pic/HTTP2ltZy56Y29vbC5jbi9jb21tdW5pdHkvMDFjNmQ0NTU0NzUyMTIwMDAwMDAyYjAxNzNjZWUxLmpwZwloglog.jpg)  <!-- .element: width="60%" -->
 
 ---
 
@@ -185,7 +185,6 @@ Huam me = new Human();
 ...
 
 ``` 
-
 
 ---
 
@@ -249,6 +248,11 @@ class God{
 
 ```
 
+---
+
+## Composition
+
+One class has another as a part.
 
 ---
 
@@ -257,20 +261,245 @@ class God{
 ```java
 class Society{
 
-  Human[] members;
+  Human[] members; //A society's subparts
 
   void initialize(){
+    Human you = new Human();
+    Human me = new Human();
     members = new Human[2]();
-    members[0] = new Huamn();
+    members[0] = you; 
+    members[1] = me;
   }
 
   void functioning(){
-
+    while(!me.isDead() && !you.isDead()){
+      me.talk(); 
+      me.eat(); 
+      you.talk(); 
+      you.eat();
+    }
   }
-} 
 
+  public static void main(String[] args){
+    Society society = new Society();
+    society.initialize();
+    society.functioning();
+  }
+}
+```
+
+
+---
+
+## Inheritance
+
+One class is a specialized version of another.
+
+---
+
+男人和女人
+
+```java
+class Man extends Human{
+  void playDota(){}
+}
+
+class Woman extends Human{
+  void selfie(){}
+}
+
+Man me = new Man();
+me.playDota();
+me.talk();
+
+Woman her = new Woman();
+her().selfie();
+her.eat();
 ```
 
 ---
+
+## Override
+```java
+class Man extends Human{
+  void playDota(){}
+  @Override
+  void talk(){
+    System.out.println("bala bala");
+  }
+}
+
+class Woman extends Human{
+  void selfie(){}
+  @Override
+    void talk(){
+      while (true) System.out.println("bala bala");
+    }
+}
+```
+
+---
+
+---
+
+## 父类与子类
+
+```java
+Man me = new Man(); 
+Woman you = new Woman();
+Human her = new Human();
+Human he = new Man();
+Man he = new Human(); // wrong
+```
+
+---
+
+
+## 会是什么结果？
+
+```java
+Man me = new Man(); me.talk(); 
+Woman you = new Woman(); you.talk();
+Human her = new Human(); her.talk();
+Human he = new Man(); he.talk();
+Man he = new Human(); // wrong
+```
+
+---
+
+## Polymorphism 多态
+
+Different subclasses respond to the same message, possibly with different actions.
+
+---
+
+## 会是什么结果？
+
+```java
+class Society{
+  Human[] members;
+  void initialize(){
+    Man you = new Man();
+    Woman me = new Woman();
+    members = new Human[2]();
+    members[0] = you; 
+    members[1] = me;
+  }
+  void functioning(){
+    while(!me.isDead() && !you.isDead()){
+      me.talk(); 
+      you.talk(); 
+    }
+  }
+
+  public static void main(String[] args){
+    Society society = new Society();
+    society.initialize();
+    society.functioning();
+  }
+}
+
+```
+
+
+---
+
+## Initialization
+
+```java
+
+class Human{
+  int age;
+  boolean gender;
+  ....
+}
+
+Human you = new Human(); // age=0; gender=false;
+```
+
+---
+
+## Customized Initialization
+
+
+```java
+class Human{
+  int age;
+  boolean gender;
+  Human(){
+    age = 0;
+    gender = true;
+  }
+
+  Human(int age){
+    self.age = age; //self -> this object
+  }
+  ...
+}
+```
+
+---
+
+## Destroying Objects
+
+If an object goes “out of scope,” it can no longer be used (its name is no longer known).
+In C++, we might need to write an explicit function to free memory allocated to an object.
+Java uses references and “garbage collection”.
+
+---
+
+## What Happens?
+
+```java
+class Woman{
+  ...
+  void giveBirth() {
+      Human baby;
+      baby = new Human();
+      return;
+  } 
+  ...
+}
+```
+
+The `Human` object still exists, but the reference `baby` disappears (it’s out of scope after return). Eventually, the garbage collector removes the actual `Human` object, i.e., the `baby`.
+
+---
+
+## Inside
+
+![](http://www.programcreek.com/wp-content/uploads/2013/09/string-pass-by-reference--650x247.jpeg)
+
+
+---
+
+## Primitives ?
+
+```java
+int i;
+double d;
+...
+```
+
+
+---
+
+## Heap and Stack
+
+![](https://i.stack.imgur.com/KdBPf.png)
+
+
+---
+
+DO NOT compile and run with your eye(s) and mouth!
+
+---
+
+Let's DO the Java Programming!
+
+![](https://www.jetbrains.com/idea/img/screenshots/idea_overview_5_1@2x.png) <!-- .element: width="60%" -->
+
+---
+
 
 # END
