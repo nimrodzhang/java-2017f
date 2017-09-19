@@ -42,7 +42,7 @@ Programming Pradigms
 
 &nbsp;
 
-**这种编程语言迫使我们以机器视角进行编程**
+<span style="color:green">**这种编程语言迫使我们以机器视角进行编程** </span> <!-- .element: class="fragment" -->
 
 ---
 
@@ -71,7 +71,7 @@ Programming Pradigms
 ## 如何把大象装进冰箱？
 
 为了把大象装进冰箱，需要做三个动作（或者叫行为）。
-每个动作有一个执行者，它就是对象。
+每个动作有一个执行者，它就是对象。 
 
 1. 冰箱，你给我把门打开
 2. 大象，你给我钻到冰箱里去
@@ -90,9 +90,9 @@ Programming Pradigms
 _“面向对象编程的首要工作就是认识待解决问题所涉及的基本对象和他们间的相互关系”_
 <div align="right"><small>- 徐家福，《对象式程序设计语言》</small></div>
 
-然后通过将这些对象映射到计算机中，实现计算机对现实问题的模拟，得到与应用问题结构对应（一致）的程序系统结构。
+然后通过将这些对象映射到计算机中，实现计算机对现实问题的模拟，得到与应用问题结构对应（一致）的程序系统结构。 <!-- .element: class="fragment" -->
 
-**这样使我们能从问题的角度进行编程**
+<span style="color:gold">**这样使我们能从问题的角度进行编程**</span> <!-- .element: class="fragment" -->
 
 
 ---
@@ -103,11 +103,38 @@ Smalltalk, 1970s, Alan Kay
 
 ![AlanKay](https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Alan_Kay_%283097597186%29.jpg/1920px-Alan_Kay_%283097597186%29.jpg)  <!-- .element height="40%" width="40%" --> 
 
+---
+
+## 面向对象（Object Oriented）
+
+- Everything is an object. 
+- A program is a bunch of objects telling each other what to do, by sending messages. 
 
 ---
 
-## 对象
+## 对象：现实世界中对象的映射和抽象
+- Each object has its own memory, and is made up of other objects. 
+- Every object has a type (class). 
+- An object has an interface, determined by its class.
 
+---
+
+“你”、“我”、“他／她”：对象（Object）
+
+“人”：类型（Class）
+
+```java
+class Human{
+
+}
+Human you, me, him, her;
+```
+
+---
+
+![](http://www.shuoshuokong.org/uploads/allimg/160919/2-160919104204.jpg)
+
+“你（对象）不是人（类型）！”
 
 ---
 
