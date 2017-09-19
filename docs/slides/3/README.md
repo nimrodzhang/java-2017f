@@ -83,7 +83,9 @@ Programming Pradigms
 
 ---
 
-“面向过程”是做一件事，是对机器行为的说明；“面向对象”是造一堆东西，是对现实中对象的刻画。
+“面向过程”是做一件事，是对机器行为的说明；
+
+“面向对象”是造一堆东西，是对现实中对象的刻画。
 
 ---
 
@@ -114,10 +116,10 @@ Smalltalk, 1970s, Alan Kay
 
 ---
 
-## 对象：现实世界中对象的映射和抽象
+## 对象：现实世界中事物的抽象
 
 
-“你”、“我”、“他／她”：对象（Object）
+“你”、“我”、“他／她／它”
 
 
 ---
@@ -139,7 +141,7 @@ Each object has its own memory, and is made up of other objects.
 
 <span style="color:gold">接口即与对外界交互的接口，代表对象的行为。同类型对象行为一致</span> <!-- .element: class="fragment" -->
 
-“人”：类型（Class）<!-- .element: class="fragment" -->
+“人”<!-- .element: class="fragment" -->
 
 
 ---
@@ -161,6 +163,8 @@ Huam me;
 Huamn him, her;
 ```
 
+定义类型，声明对象。
+
 Object Oriented Programming in Java
 
 
@@ -181,7 +185,7 @@ class Human{
 
 ...
 Human you = new Human(); 
-Huam me = new Human();
+Human me = new Human();
 ...
 
 ``` 
@@ -300,11 +304,11 @@ One class is a specialized version of another.
 男人和女人
 
 ```java
-class Man extends Human{
+class Man extends Human {
   void playDota(){}
 }
 
-class Woman extends Human{
+class Woman extends Human {
   void selfie(){}
 }
 
@@ -315,6 +319,33 @@ me.talk();
 Woman her = new Woman();
 her().selfie();
 her.eat();
+```
+
+---
+
+## 最抽象的那个对象
+
+`Object`
+
+对一切事物的泛指。
+
+```java
+class Object {
+  ...
+}
+```
+
+<small>https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html</small>
+
+
+---
+
+## Actually
+
+```java
+class Human extends Object {
+  ...
+}
 ```
 
 ---
@@ -491,7 +522,9 @@ double d;
 
 ---
 
-DO NOT compile and run with your eye(s) and mouth!
+
+![](http://poster.keepcalmandposters.com/9314179.jpg) <!-- .element: width="50%" -->
+
 
 ---
 
