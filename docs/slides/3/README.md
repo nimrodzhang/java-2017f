@@ -110,31 +110,166 @@ Smalltalk, 1970s, Alan Kay
 - Everything is an object. 
 - A program is a bunch of objects telling each other what to do, by sending messages. 
 
+<span style="color:gold">写程序就是写对象，实现对现实世界的模拟 </span> <!-- .element: class="fragment" -->
+
 ---
 
 ## 对象：现实世界中对象的映射和抽象
-- Each object has its own memory, and is made up of other objects. 
-- Every object has a type (class). 
-- An object has an interface, determined by its class.
 
----
 
 “你”、“我”、“他／她”：对象（Object）
 
-“人”：类型（Class）
 
-```java
-class Human{
+---
 
-}
-Human you, me, him, her;
-```
+## 对象 Object
+
+
+Each object has its own memory, and is made up of other objects. 
+
+<span style="color:gold">对象属性</span> <!-- .element: class="fragment" -->
+
+
+---
+
+## 对象类型 Class
+
+- An object has an interface, determined by its class.
+- Every object has a type (class). 
+
+<span style="color:gold">接口即与对外界交互的接口，代表对象的行为。同类型对象行为一致</span> <!-- .element: class="fragment" -->
+
+“人”：类型（Class）<!-- .element: class="fragment" -->
+
 
 ---
 
 ![](http://www.shuoshuokong.org/uploads/allimg/160919/2-160919104204.jpg)
 
 “你（对象）不是人（类型）！”
+
+---
+
+## 面向对象编程
+
+```java
+class Human{
+
+}
+Human you;
+Huam me;
+Huamn him, her;
+```
+
+Object Oriented Programming in Java
+
+
+---
+
+女娲造人
+
+![](http://imgs15.iaweg.com/pic/HTTP2ltZy56Y29vbC5jbi9jb21tdW5pdHkvMDFjNmQ0NTU0NzUyMTIwMDAwMDAyYjAxNzNjZWUxLmpwZwloglog.jpg)  <!-- .element: width="80%" -->
+
+---
+
+## 在代码中造人
+
+```java
+class Human{
+
+}
+
+...
+Human you = new Human(); 
+Huam me = new Human();
+...
+
+``` 
+
+
+---
+
+## 稍微详细点
+
+
+```java
+class Human{
+  int age; // 属性
+  boolean gender; // 属性
+
+  void talk(){} // 接口/行为
+  void eat(){  // 快乐的行为
+    ...
+  }
+  boolean isDead(){} //悲哀的行为
+}
+```
+
+---
+
+## 你还缺个女娲
+
+## 或者叫“上帝之手”
+
+---
+
+## run起来
+
+```java
+void main(){
+  Human you = new Human();
+  Human me = new Human();
+
+  while(!me.isDead() && !you.isDead()){
+    me.talk();
+    me.eat();
+    you.talk();
+    you.eat();
+  }
+}
+```
+
+---
+
+`main()`放哪里
+
+```java
+class God{
+  public static void main(String[] args){
+    Human you = new Human();
+    Human me = new Human();
+    while(!me.isDead() && !you.isDead()){
+      me.talk();
+      me.eat();
+      you.talk();
+      you.eat();
+    }
+  }
+}
+
+```
+
+
+---
+
+## 再抽象一次
+
+```java
+class Society{
+
+  Human[] members;
+
+  void initialize(){
+    members = new Human[2]();
+    members[0] = new Huamn();
+  }
+
+  void functioning(){
+
+  }
+} 
+
+```
 
 ---
 
