@@ -2,7 +2,6 @@
   <head>
     <link rel="stylesheet" href="../../reveal.js/css/reveal.css">
     <link rel="stylesheet" href="../../reveal.js/css/theme/black.css" id="theme">
-    <link rel="stylesheet" href="../../reveal.js/css/theme/black.css" id="theme">
     <link rel="stylesheet" href="../../reveal.js/lib/css/zenburn.css">    
   </head>
   <body>
@@ -30,11 +29,13 @@
           { src: '../../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
           { src: '../../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
           { src: '../../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-          { src: '../../reveal.js/plugin/notes/notes.js' }
+          { src: '../../reveal.js/plugin/notes/notes.js' },
+          { src: '../../reveal.js-menu/menu.js'} 
         ],
 				options: {
   					"highlightTheme": "darkula"
-				}
+				},
+
       });
     </script>
   </body>
