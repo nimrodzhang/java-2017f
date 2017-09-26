@@ -155,14 +155,34 @@ vs. [Reference Counting](https://en.wikipedia.org/wiki/Reference_counting)
 
 
 ```java
-package cn.edu.nju;
+package cn.edu.nju.java;
 
-class java-2017f{
+class Human{
 
 }
 ```
 
+```java
+
+import cn.edu.nju.java.Human;
+
+```
+
+---
+
+## CLASSPATH
+
+```bash
+ CLASSPATH=.;/usr
+ ```
+
+---
+
 组织管理、避免冲突、访问控制 （PP. 210-220)
+
+
+---
+
 
 ---
 
