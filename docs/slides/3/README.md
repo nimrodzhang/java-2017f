@@ -155,7 +155,7 @@ Each object has its own memory, and is made up of other objects.
 ## 面向对象编程
 
 ```java
-class Human{
+class Human {
 
 }
 Human you;
@@ -179,7 +179,7 @@ Object Oriented Programming in Java
 ## 在代码中造人
 
 ```java
-class Human{
+class Human {
 
 }
 
@@ -196,7 +196,7 @@ Human me = new Human();
 
 
 ```java
-class Human{
+class Human {
   int age; // 属性
   boolean gender; // 属性
 
@@ -219,7 +219,7 @@ class Human{
 ## run起来
 
 ```java
-void main(){
+void main() {
   Human you = new Human();
   Human me = new Human();
 
@@ -237,7 +237,7 @@ void main(){
 `main()`放哪里
 
 ```java
-class God{
+class God {
   public static void main(String[] args){
     Human you = new Human();
     Human me = new Human();
@@ -263,14 +263,14 @@ One class has another as a part.
 ## 再抽象一次
 
 ```java
-class Society{
+class Society {
 
   Human[] members; //A society's subparts
 
   void initialize(){
     Human you = new Human();
     Human me = new Human();
-    members = new Human[2]();
+    members = new Human[2];
     members[0] = you; 
     members[1] = me;
   }
@@ -352,7 +352,7 @@ class Human extends Object {
 
 ## Override
 ```java
-class Man extends Human{
+class Man extends Human {
   void playDota(){}
   @Override
   void talk(){
@@ -360,7 +360,7 @@ class Man extends Human{
   }
 }
 
-class Woman extends Human{
+class Woman extends Human {
   void selfie(){}
   @Override
     void talk(){
@@ -412,7 +412,7 @@ class Society{
   void initialize(){
     Man you = new Man();
     Woman me = new Woman();
-    members = new Human[2]();
+    members = new Human[2];
     members[0] = you; 
     members[1] = me;
   }
@@ -454,15 +454,15 @@ Human you = new Human(); // age=0; gender=false;
 
 
 ```java
-class Human{
+class Human {
   int age;
   boolean gender;
-  Human(){
+  Human() {
     age = 0;
     gender = true;
   }
 
-  Human(int age){
+  Human(int age) {
     self.age = age; //self -> this object
   }
   ...
@@ -482,7 +482,7 @@ Java uses references and “garbage collection”.
 ## What Happens?
 
 ```java
-class Woman{
+class Woman {
   ...
   void giveBirth() {
       Human baby;
