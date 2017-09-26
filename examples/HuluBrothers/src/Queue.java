@@ -34,11 +34,10 @@ public class Queue {
 
     public void sort() {
 
-        Huluwa temp;
-
+        Huluwa huluwa;
         int j;
         for (int i = 1; i < positions.length; i++) {
-            Huluwa huluwa = positions[i].holder;
+            huluwa = positions[i].holder;
             j = i - 1;
             //如果huluwa小于后端数，那后端的数要顺移
             while (j >= 0 && huluwa.seniority < positions[j].holder.seniority) {
