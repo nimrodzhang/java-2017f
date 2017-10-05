@@ -504,6 +504,56 @@ public class WindowDelegate {
 
 <span style="color:red">Why?</span> <!-- .element: class="fragment" -->
 
+---
+
+## final 
+
+pp262-271
+
 
 ---
+
+
+## Polymorphism
+
+### ”继承“的产物
+### 抽象思维的支撑
+
+### 延迟绑定
+
+
+-> 方法实现不确定 -> 抽象实现
+
+---
+
+## 抽象类
+
+---
+
+
+## Interface
+
+
+接口与实现的分离
+
+---
+
+## 多继承
+
+---
+
+## 接口中的成员变量
+
+---
+
+
+## Inner Classes
+
+---
+
+## Why Inner Classes
+
+---
+
+
 # END
