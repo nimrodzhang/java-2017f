@@ -35,7 +35,7 @@ public class Queue {
             position.getHolder().report();
         }
 
-        System.out.println();
+        System.out.println("\n");
         System.out.flush();
     }
 
@@ -51,16 +51,30 @@ public class Queue {
 
 
     public void insertSort() {
-        Huluwa huluwa;
+        Huluwa huluwa = null;
         int j;
         for (int i = 1; i < this.positions.length; i++) {
-            huluwa = positions[i].getHolder();
-            j = i - 1;
-            //如果huluwa小于后端数，那后端的数要顺移
-            while (j >= 0 && huluwa.getSeniority().ordinal() < positions[j].getHolder().getSeniority().ordinal()) {
-                positions[j --].getHolder().setPosition(positions[j+1]);
+            for (j = i; j > 0; j--) {
+                if (positions[j].getHolder().getSeniority().ordinal() < positions[j - 1].getHolder().getSeniority().ordinal()) {
+                    huluwa = positions[j].getHolder();
+                    positions[j - 1].getHolder().setPosition(positions[j]);
+                    huluwa.setPosition(positions[j - 1]);
+                }
             }
-            huluwa.setPosition(positions[j + 1]);
+        }
+    }
+
+    public void bubbleSort() {
+
+        Huluwa huluwa;
+        for (int i = 0; i < positions.length - 1; i++) {
+            for (int j = 0; j < positions.length - 1 - i; j++) {
+                if (positions[j].getHolder().getSeniority().ordinal() > positions[j + 1].getHolder().getSeniority().ordinal()) {
+                    huluwa = positions[j].getHolder();
+                    positions[j + 1].getHolder().setPosition(positions[j]);
+                    huluwa.setPosition(positions[j + 1]);
+                }
+            }
         }
     }
 
@@ -81,6 +95,15 @@ public class Queue {
         queue.rollCall();
 
         queue.insertSort();
+
+        queue.rollCall();
+
+        queue.shuffle();
+
+
+        queue.rollCall();
+
+        queue.bubbleSort();
 
         queue.rollCall();
 
