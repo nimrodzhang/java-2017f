@@ -1,11 +1,23 @@
 public class Huluwa {
 
-    public String name;
     public COLOR color;
-    public int seniority;
+    public SEIORITY seniority;
+
+    Huluwa(COLOR color, SEIORITY seiority){
+        this.color = color;
+        this.seniority = seiority;
+    }
+
+    public void report(){
+        System.out.print(this.seniority.toString()+":"+this.color.toString()+"; ");
+    }
 
 }
 
 enum COLOR {
-    CHI, CHENG, HUANG, LV, QING, LAN, ZI
+    赤, 橙, 黄, 绿, 青, 蓝, 紫
+}
+
+enum SEIORITY {
+    一, 二, 三, 四, 五, 六, 七
 }
