@@ -6,6 +6,17 @@ public class Queue {
 
     private Position[] positions;
 
+    public Position[] getPositions() {
+        return positions;
+    }
+
+
+    public Huluwa[] getBrothers() {
+        return brothers;
+    }
+
+
+
     private Huluwa[] brothers;
 
     public Queue(Huluwa[] brothers) {
@@ -49,35 +60,6 @@ public class Queue {
         }
     }
 
-
-    public void insertSort() {
-        Huluwa huluwa = null;
-        int j;
-        for (int i = 1; i < this.positions.length; i++) {
-            for (j = i; j > 0; j--) {
-                if (positions[j].getHolder().getSeniority().ordinal() < positions[j - 1].getHolder().getSeniority().ordinal()) {
-                    huluwa = positions[j].getHolder();
-                    positions[j - 1].getHolder().setPosition(positions[j]);
-                    huluwa.setPosition(positions[j - 1]);
-                }
-            }
-        }
-    }
-
-    public void bubbleSort() {
-
-        Huluwa huluwa;
-        for (int i = 0; i < positions.length - 1; i++) {
-            for (int j = 0; j < positions.length - 1 - i; j++) {
-                if (positions[j].getHolder().getSeniority().ordinal() > positions[j + 1].getHolder().getSeniority().ordinal()) {
-                    huluwa = positions[j].getHolder();
-                    positions[j + 1].getHolder().setPosition(positions[j]);
-                    huluwa.setPosition(positions[j + 1]);
-                }
-            }
-        }
-    }
-
     public static void main(String[] args) {
 
         Huluwa[] brothers = new Huluwa[7];
@@ -94,7 +76,7 @@ public class Queue {
 
         queue.rollCall();
 
-        queue.insertSort();
+        new InsertionSorter().sort(queue);
 
         queue.rollCall();
 
@@ -103,8 +85,7 @@ public class Queue {
 
         queue.rollCall();
 
-        queue.bubbleSort();
-
+        new BubbleSorter().sort(queue);
         queue.rollCall();
 
 
