@@ -1,15 +1,34 @@
 public class Huluwa {
 
-    public COLOR color;
-    public SEIORITY seniority;
+    private COLOR color;
+    private SEIORITY seniority;
+    private Position position;
 
-    Huluwa(COLOR color, SEIORITY seiority){
+    public COLOR getColor() {
+        return color;
+    }
+
+    public SEIORITY getSeniority() {
+        return seniority;
+    }
+
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+        position.setHolder(this);
+    }
+
+    Huluwa(COLOR color, SEIORITY seiority) {
         this.color = color;
         this.seniority = seiority;
     }
 
-    public void report(){
-        System.out.print(this.seniority.toString()+":"+this.color.toString()+"; ");
+    public void report() {
+        System.out.print(this.seniority.toString() + "(" + this.color.toString() + ")@" + this.position.getX() + ";");
     }
 
 }
