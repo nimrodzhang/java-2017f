@@ -504,6 +504,360 @@ public class WindowDelegate {
 
 <span style="color:red">Why?</span> <!-- .element: class="fragment" -->
 
+---
+
+## final 
+
+pp262-271
+
 
 ---
+
+## final的变量
+
+
+
+常量声明(经常和static关键字一起使用)
+
+```java
+public static final int i = 0;
+
+i=1; // compilation errorerror
+
+```
+
+---
+
+## final方法
+
+代表这个方法不可以被子类的方法重写。
+
+```java
+class Man extends Human{
+    public final void hitChild(){
+        //beat and KO!
+    }
+}
+ 
+class Father extends Man{
+    @Override
+    public final void hitChild(){
+        // beat harder ...
+        return // compilation error: overridden method is final
+    }
+}
+
+```
+
+“父类中这件事已经做得够好了，子类无法超越”
+
+
+---
+
+## final类
+
+
+```java
+final class Father extends Man{ 
+
+}
+
+class Son extends Father{ //compilation error: cannot inherit from final class
+
+}
+
+```
+“老子整个已经不可超越”
+
+
+---
+
+
+## Polymorphism
+
+
+多态性是指对象能够有多种形态。
+
+- 男人是人
+- 男人是动物
+- 男人是一种存在
+
+---
+
+## 多态是”继承“的产物
+
+```java
+
+class Man extends Human {
+    ...
+}
+
+class Human extends Creature{
+    ...
+} 
+
+class Creature extends Being{
+    ...
+}
+```
+
+---
+
+## 多态意味着什么？
+
+```java
+class Creature extends Being{
+    public void eat(){
+        System.out.println("eating");
+    }
+}
+class Human extends Creature{
+    @Override
+    public void eat{
+        System.out.println("cooking...eating")
+    }
+} 
+class Woman extends Human {
+    @Override
+    public void eat{
+        System.out.println("cooking...photoing...eating");
+    }
+}
+
+Being you = new Woman();
+you.eat(); //??
+```
+
+---
+
+## 再举个例子
+
+```java
+class Shape{  
+    void draw(){
+        System.out.println("Draw Shape");
+    }  
+}  
+class Circle extends Shape{  
+    void draw(){
+        System.out.println("Draw Circle");
+    }  
+}   
+class Triangle extends Shape{  
+    void draw(){
+        System.out.println("Draw Triangle");
+    }  
+}  
+class Square extends Shape{  
+    void draw(){
+        System.out.println("Draw Square");
+    }  
+}  
+public class Test {  
+     public static void main(String[] args) {  
+         Shape[] shapes = {new Circle(), new Triangle(), new Square()};  
+         for(Shape s : shapes){  
+             s.draw();  
+         }  
+     }  
+}  
+```
+执行结果？
+
+
+---
+
+## 再看一个例子
+```java
+class Shape{  
+    private void draw(){  
+        System.out.println("Draw Shape");  
+    }  
+      
+    void show(){  
+        draw();  
+    }  
+}  
+  
+class Circle extends Shape{  
+    void draw(){  
+        System.out.println("Draw Circle");  
+    }  
+}  
+  
+public class Test {
+     public static void main(String[] args) {  
+         Shape s = new Circle();  
+         s.show();  
+     }  
+}  
+```
+执行结果？
+
+---
+
+## 多态形成的条件
+
+- 继承
+- 重写
+- 父类引用指向子类对象
+
+实际上是由Java中的”动态绑定“机制造成的。<!-- .element: class="fragment" -->
+
+---
+
+## 动态绑定
+
+https://stackoverflow.com/questions/19017258/static-vs-dynamic-binding-in-java
+
+
+http://www.jianshu.com/p/0677f366db08
+
+
+---
+
+## 再想想，Why？
+
+## 抽象思维（编程）的支撑！<!-- .element: class="fragment" -->
+
+---
+
+## 抽象类
+
+当一个类没有足够的信息来描述一个具体的对象，而需要其他具体的类来支撑它，那么这样的类我们称它为抽象类。
+
+
+--- 
+
+## 举个例子
+
+```java
+class Human {
+    public void meetLouisVuitton(){
+        //??
+    }
+}
+```
+
+---
+
+## Abstract Class
+```java
+abstract class Human {
+    public abstract void meetLouisVuitton();
+}
+class Man extends Human {
+    @Override
+    public void meetLouisVuitton(){
+        pass();
+    }
+}
+class Woman extends Human {
+    @Override
+    public void meetLouisVuitton(){
+        enter();
+    }
+}
+
+```
+
+Why？应对不确定。<!-- .element: class="fragment" -->
+
+---
+
+
+## Interface
+
+当所有行为都不确定时，来一份Interface。
+
+接口比抽象类更抽象。
+
+接口是用来建立类与类之间的协议（protocol）。
+
+
+---
+
+## 举个例子
+
+```java
+public interface Communicate{
+    public String talkTo(String message);
+}
+
+public Man extends Human implements Communicate{
+    ...
+    public String talkTo(String message){
+        return process(message);
+    }
+}
+public Woman extends Human implements Communicate{
+    ...
+    public String talkTo(String message){
+        return "我不听我不听我不听";
+    }
+}
+```
+
+---
+
+## Why？
+
+抽象的行为协议定义
+
+接口与实现的分离
+
+
+---
+
+## 多继承
+
+```java
+interface A{
+    public void a();
+}
+interface B{
+    public void b();
+}
+
+class C implements A,B {
+    public void a(){
+        ...
+    }
+    public void b(){
+        ...
+    }
+}
+```
+为什么Java不支持多继承多个父类但支持实现多个接口？<!-- .element: class="fragment" -->
+
+---
+
+## 接口中的成员变量
+
+- 成员变量必须是`public static final`
+
+为什么? 公有化，标准化、规范化。<!-- .element: class="fragment" -->
+
+---
+
+
+## Inner Classes
+
+pp. 345-388
+
+Why Inner Classes？<!-- .element: class="fragment" -->
+
+下次再说<!-- .element: class="fragment" -->
+
+---
+
+
+## 再看葫芦娃
+
+
+![](https://camo.githubusercontent.com/a5cc35d2179c5bf861f6a8eeca25fc5fa3e876a2/687474703a2f2f656e676c6973682e6372692e636e2f6d6d736f757263652f696d616765732f323030392f30362f32342f34363334636172746f6e312e6a7067)
+
+---
+
+
 # END
