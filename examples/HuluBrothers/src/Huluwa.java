@@ -1,14 +1,14 @@
 public class Huluwa implements Creature, Comparable{
 
     private COLOR color;
-    private SEIORITY seniority;
+    private SENIORITY seniority;
     private Position position;
 
     public COLOR getColor() {
         return color;
     }
 
-    public SEIORITY getSeniority() {
+    public SENIORITY getSeniority() {
         return seniority;
     }
 
@@ -24,7 +24,7 @@ public class Huluwa implements Creature, Comparable{
         position.setHolder(this);
     }
 
-    Huluwa(COLOR color, SEIORITY seiority) {
+    Huluwa(COLOR color, SENIORITY seiority) {
         this.color = color;
         this.seniority = seiority;
     }
@@ -54,6 +54,6 @@ enum COLOR {
     赤, 橙, 黄, 绿, 青, 蓝, 紫
 }
 
-enum SEIORITY {
+enum SENIORITY {
     一, 二, 三, 四, 五, 六, 七
 }
