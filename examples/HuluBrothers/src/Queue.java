@@ -88,7 +88,6 @@ public class Queue {
         new BubbleSorter().sort(queue);
         queue.rollCall();
 
-
     }
 }
 
