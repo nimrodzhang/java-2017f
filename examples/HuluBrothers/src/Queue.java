@@ -11,32 +11,32 @@ public class Queue {
     }
 
 
-    public Huluwa[] getBrothers() {
-        return brothers;
+    public Creature[] getCreatures() {
+        return creatures;
     }
 
 
 
-    private Huluwa[] brothers;
+    private Creature[] creatures;
 
     public Queue(Huluwa[] brothers) {
 
 
         this.positions = new Position[brothers.length];
 
-        this.brothers = brothers;
+        this.creatures = brothers;
 
         for (int i = 0; i < brothers.length; i++) {
 
             this.positions[i] = new Position(i);
-            this.brothers[i].setPosition(this.positions[i]);
+            this.creatures[i].setPosition(this.positions[i]);
         }
     }
 
 
     public void rollCall() {
-        for (Huluwa huluwa : this.brothers) {
-            huluwa.report();
+        for (Creature creature : this.creatures) {
+            creature.report();
         }
         System.out.println();
         System.out.flush();
@@ -52,11 +52,11 @@ public class Queue {
 
     private void shuffle() {
         Random rnd = ThreadLocalRandom.current();
-        for (int i = brothers.length - 1; i > 0; i--) {
+        for (int i = creatures.length - 1; i > 0; i--) {
             int index = rnd.nextInt(i + 1);
-            Position position = brothers[index].getPosition();
-            brothers[index].setPosition(brothers[i].getPosition());
-            brothers[i].setPosition(position);
+            Position position = creatures[index].getPosition();
+            creatures[index].setPosition(creatures[i].getPosition());
+            creatures[i].setPosition(position);
         }
     }
 

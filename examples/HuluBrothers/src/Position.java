@@ -2,15 +2,15 @@ public class Position {
 
     private int x;
 
-    public Huluwa getHolder() {
+    public Creature getHolder() {
         return holder;
     }
 
-    public void setHolder(Huluwa holder) {
+    public void setHolder(Creature holder) {
         this.holder = holder;
     }
 
-    private Huluwa holder;
+    private Creature holder;
 
     public int getX() {
         return x;
