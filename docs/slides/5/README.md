@@ -10,8 +10,8 @@
 
 - SRP (The Single-Responsibility Principle)
 - OCP (The Open-Closed Principle) 
-- ISP (The Interface-Segregation Principle) 
 - LSP (The Liskov Substitution Principle)
+- ISP (The Interface-Segregation Principle) 
 - DIP (The Dependency-Inversion Principle) 
 
 ---
