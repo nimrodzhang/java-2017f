@@ -24,7 +24,7 @@
 
 ---
 
-## Example
+## 来个例子
 
 <br/>
 <img src="http://yp.njuics.cn:7911/UML-1.jpg" width="800" align=center />
