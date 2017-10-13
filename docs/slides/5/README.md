@@ -88,8 +88,7 @@ interface Modem{
 ## Abstraction is the key!
 
 <br/>
-![](http://www.plantuml.com/plantuml/png/Syv9B2vMSCx9JCqhuN86Su9JYyfIYxYu888AkhfsK240)<!-- .element height="20%" --> 
-
+![](http://www.plantuml.com/plantuml/png/Syv9B2vMSCx9JCqhuN86Su9JYyfIYxYu888AkhfsK240) 
 
 ---
 
@@ -97,7 +96,7 @@ interface Modem{
 
 <br/>
 <br/>
-![](http://www.plantuml.com/plantuml/png/yymhIIrAIqnELN3EoKpDAudtX0bmEUSa5XSh1ASMbQKMSN6XIolOrEZgmcGXaWgwkdOOnW00)<!-- .element height="20%" --> 
+![](http://www.plantuml.com/plantuml/png/yymhIIrAIqnELN3EoKpDAudtX0bmEUSa5XSh1ASMbQKMSN6XIolOrEZgmcGXaWgwkdOOnW00)
 
 ---
 
