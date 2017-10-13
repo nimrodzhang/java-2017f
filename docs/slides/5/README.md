@@ -61,7 +61,7 @@ interface Modem{
 <br/>
 ![](http://www.plantuml.com/plantuml/png/yymhIIrAIqnELN19B4cCTyv8pCjBpU7oX0ixvmC5aaioy_Euk92LADZKwEeg-EQdfER6U-OMvAJcfkQL98BL8RJWLWG0)<!-- .element height="30%" width="30%" --> 
 
-- <font color=#0099ff>Note：如果应用程序的变化方式总是导致这两个职责同时变化，那么就不必分离它们！</font>
+ <font color=#0099ff>Note：如果应用程序的变化方式总是导致这两个职责同时变化，那么就不必分离它们！</font>
 
 ---
 
@@ -88,15 +88,45 @@ interface Modem{
 ## Abstraction is the key!
 
 <br/>
-![](http://www.plantuml.com/plantuml/png/Syv9B2vMSCx9JCqhuN86Su9JYyfIYxYu888AkhfsK240) 
+![](http://www.plantuml.com/plantuml/png/Syv9B2vMSCx9JCqhuShBBqbLo4bDAx62YYXa5YlafMQMPAGMAUGNfEOfvEKNAIJdv1UdfkXnEOEr1gSMbQKMSN51DUZgsa650000) 
 
 ---
 
 ## Applying OCP
 
 <br/>
+![](http://www.plantuml.com/plantuml/png/yymhIIrAIqnELN3EoKpDAudtX0bmEUSa5XSh1ASMbQKMGJaGDLnv-IMf2ZcfQILMK165p6A5fFoI38NyWjGyXSIy58NadFpYr1GkBdHJ5MngT7KHXe8rw-hQOTWE0000)
+
+---
+
+## Template Pattern
+
 <br/>
-![](http://www.plantuml.com/plantuml/png/yymhIIrAIqnELN3EoKpDAudtX0bmEUSa5XSh1ASMbQKMSN6XIolOrEZgmcGXaWgwkdOOnW00)
+![](http://www.plantuml.com/plantuml/png/IqmgBYbAJ2vHICv9B2vM2CZFoKokhEPIKD0koyzCKIW0yzrAyv9BClFpD3I14jM9K2srK3N5gKLbcScfI8fgkRWWnddc5kIavgRcbII2P136OjK2iLl1faPN5qqZ0000)
+
+ <font color=#0099ff>A clear separation of generic functionality from the detailed implementation of that functionality！</font>
+
+---
+
+## Heuristics
+
+- OCP是面向对象设计的核心所在！
+  + 灵活性、可重用性、可维护性
+  + 使用OOPL不代表遵循了OCP
+  + 肆意抽象亦不是一个好主意
+- 100%的封闭不可能，必须有策略地对待这个问题。
+  + 对程序中呈现出频繁变化的那些部分做出抽象，拒绝不成熟的抽象和抽象本身一样重要。
+
+
+---
+
+## LSP Liskov替换法则
+
+- Subtypes must be substitutable for their base types. 
+<br/></br/>
+- If for each object o1 of type S there is an object o2 of type T such that for all programs P defined in terms of T, the behavior of P is unchanged when o1 is substituted for o2 then S is a subtype of T. [Liskov88] 
+
+
 
 ---
 
