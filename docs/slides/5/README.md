@@ -27,14 +27,17 @@
 ## 来个例子
 
 <br/>
-<img src="http://yp.njuics.cn:7911/UML-1.jpg" width="800" align=center />
+
+![](http://www.plantuml.com/plantuml/png/Iyv9B2vM24fDBadCIyz9hUPIKD0koyzCKKWfIYpNq0HnK_9Bat9I5HABKXE10hLSGE2UdrjGMf9OafcVbvWJxvwQdvjQKbGPxrXGa9EP31PMqDMrGnZBvLwKM901bCh1emRE0ekxXte20000) <!-- .element height="50%" width="50%" --> 
+
 
 ---
 
 ## Applying SRP
 
 <br/>
-<img src="http://yp.njuics.cn:7911/UML-2.jpg" width="800" align=center />
+![](http://www.plantuml.com/plantuml/png/Iyv9B2vM24fDBadCIyz9hUPIKD0koyzCKKWfIYpNqEIgvU9A1YjnJytFJIqfoaoEHrMSab-Qb9Ega5YKcWXHpkMUdrjGMf9OafcVbvWJ3zLN6UzOK92JcGmMLj3LjSDc89TxKM911b1H3ePgOjIuXtfomTNXj0DDHQWd0000)<!-- .element height="50%" width="50%" -->
+
 
 ---
 
@@ -56,7 +59,7 @@ interface Modem{
 ## Applying SRP
 
 <br/>
-<img src="http://yp.njuics.cn:7911/UML-3.jpg" width="600" align=center />
+![](http://www.plantuml.com/plantuml/png/yymhIIrAIqnELN19B4cCTyv8pCjBpU7oX0ixvmC5aaioy_Euk92LADZKwEeg-EQdfER6U-OMvAJcfkQL98BL8RJWLWG0)<!-- .element height="30%" width="30%" --> 
 
 - <font color=#0099ff>Note：如果应用程序的变化方式总是导致这两个职责同时变化，那么就不必分离它们！</font>
 
@@ -85,14 +88,16 @@ interface Modem{
 ## Abstraction is the key!
 
 <br/>
-<img src="http://yp.njuics.cn:7911/UML-4.jpg" width="600" align=center />
+![](http://www.plantuml.com/plantuml/png/Syv9B2vMSCx9JCqhuN86Su9JYyfIYxYu888AkhfsK240)<!-- .element height="20%" width="20%" --> 
+
 
 ---
 
 ## Applying OCP
 
 <br/>
-<img src="http://yp.njuics.cn:7911/UML-5.jpg" width="600" align=center />
+<br/>
+![](http://www.plantuml.com/plantuml/png/yymhIIrAIqnELN3EoKpDAudtX0bmEUSa5XSh1ASMbQKMSN6XIolOrEZgmcGXaWgwkdOOnW00)<!-- .element height="20%" width="20%" --> 
 
 ---
 
