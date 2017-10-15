@@ -127,6 +127,155 @@ interface Modem{
 - If for each object o1 of type S there is an object o2 of type T such that for all programs P defined in terms of T, the behavior of P is unchanged when o1 is substituted for o2 then S is a subtype of T. [Liskov88] 
 
 
+---
+
+## LSP Violation (I)
+
+<br/>
+- RTTI (运行时类型识别)
+
+<br/>
+```C
+void DrawShape(const Shape& s ){
+    if(s.itsType == Shape::square){
+     static_cast<const Square&>(s).draw()
+    else if (s.itsType == Shape::circle)
+     static_cast<const Circle&>(s).draw()
+}
+```
+<span style="color:red">增加一种新类型?</span> <!-- .element: class="fragment" -->
+
+
+---
+
+## LSP Violation (II)
+
+<br/>
+- incorrect IS-A Relationship
+
+<br/>
+![](http://www.plantuml.com/plantuml/png/Iyv9B2vM24fDBadCIyz9vKe6yuCBInEBKhcuuE8ADZMwkb1X0000)
+
+
+---
+
+## LSP Violation (II)
+
+<br/>
+- incorrect IS-A Relationship
+
+```java
+class Rectangle{
+  double itsWidth;
+  double itsHeight;
+  public void setWidth(double w) {itsWidth=w;}
+  public void setHeight(double h) {itsHeight=h;}
+  public double area(){ return itsWidth * itsHeight;}
+}
+```
+
+```java
+class Square extends Rectangle{
+  public void setWidth(double w) {
+      super.setWidth(w); super.setHeight(w);}
+  public void setHeight(double h) {
+      super.setWidth(w); super.setHeight(w);}
+}
+```
+
+---
+
+## LSP Violation (II)
+
+<br/>
+
+```java
+void g (Rectangle r){
+   r.SetWidth(5);
+   r.SetHeight(4);
+   assert(r.area()==20);
+}
+```
+
+<span style="color:red">如果r实际类型为Square，断言结果为True or False？</span> <!-- .element: class="fragment" -->
+
+---
+
+## The Real Problem
+
+- Validity is not intrinsic.
+
+- IS-A is about Behavior 
+  + Behaviorally, a Square is not a Rectangle.
+
+---
+
+## Hueristics and Conventions
+
+- Violation 1: 
+   + Degenerate functions in derivations.
+   ```java
+      public class Base{
+          public void f(){/** some code */}
+      }
+      public class Derived extends Base{
+          public void f(){}
+      }
+   ```
+
+- Violation 2:
+  + Throwing exceptions from derivatives.
+
+
+---
+
+## LSP
+
+<br/>
+- LSP is one of the enablers of the OCP。
+
+<br/>
+- It is the substitutability of subtypes that allows a module, expressed in terms of a base type, to be extensible without modification. 
+
+---
+
+## ISP 接口隔离原则
+
+<br/>
+- Clients should not be forced to depend on methods that they do not use. 
+
+<br/>
+- Deals with the disadvantage of “fat” interfaces – whose interfaces are not cohesive. 
+
+
+---
+
+## 来个例子
+
+- Common Door
+
+```java
+class Door {
+    public abstract void Lock();
+    public abstract void Unlock();
+    public abstract bool IsDoorOpen();
+}
+```
+- Timer
+
+```java
+class Timer {
+    public void Register (int timeout, TimeClient client );
+}
+```
+```java
+class TimerClient{
+    public abstract void timeout();
+}
+```
+
+<span style="color:red">How about a timed door?</span> <!-- .element: class="fragment" -->
+
 
 ---
 
