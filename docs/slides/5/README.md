@@ -216,7 +216,7 @@ public class Client{
 
 ---
 
-## Hueristics and Conventions
+## Hueristics
 
 - Violation 1: 
    + Degenerate functions in derivations.
@@ -332,7 +332,7 @@ class TimerClient{
 
 ## Laying
 
-- Booch: “… all well structured OO architectures have clearly defined layers, with each layer providing some coherent set of services through a well-defined and controlled interface.”
+- <font size=6>Booch: “… all well structured OO architectures have clearly defined layers, with each layer providing some coherent set of services through a well-defined and controlled interface.”</font>
 
 ![](http://www.plantuml.com/plantuml/png/2yZFoKokz4ciJ2rIqDEpK_1DJSv8pCiipWKBSQ5omIf2Ip9pCaiWMW00)
 
@@ -394,6 +394,7 @@ public class Button{
 
 ![](http://www.plantuml.com/plantuml/png/Iyv9B2vMS2ejASdFg-PIK53GBiZFoT7GvAhbIamgBYbAJ2vHI0Qh2IxFB4dEI4pAINL9BSjCJeMeBYajolFF0wg7SzBImBgv86OgwEhQOMZbGXTGiAdHrLNmISmj0000)
 
+<font color="yellow">换个更友好的名字</font>
 
 ---
 
@@ -533,6 +534,10 @@ public class Button{
 ---
 
 ## 今天，你的葫芦娃违规了吗？
+
+---
+
+## Let's Embrace Change.
 
 ---
 
