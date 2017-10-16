@@ -78,10 +78,10 @@ interface Modem{
 ## OCP Inside
 
 - Two primary attributes
-  + Open for extension: the behavior of the module can be extended
-  + Closed for modification: extending the behavior of a module does not result in changes to the source or binary code of the module.
+  + <font size=6><font color="red">Open for extension</font>: the behavior of the module can be extended.</font>
+  + <font size=6><font color="red">Closed for modification</font>: extending the behavior of a module does not result in changes to the source or binary code of the module.</font>
 
-- Do not modify soucecode, but change behavior.
+- Do not modify sourcecode, but change behavior.
 
 <span style="color:yellow">Is it possible?</span><!-- .element: class="fragment" -->
 
