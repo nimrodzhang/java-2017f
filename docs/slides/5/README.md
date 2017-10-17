@@ -319,7 +319,7 @@ class Door {
 
 ```java
 class Timer {
-    public void register (int timeout, TimeClient client );
+    public void register (int timeout, TimerClient client );
 }
 ```
 ```java
