@@ -133,18 +133,66 @@ interface Modem{
 
 ## LSP Violation (I)
 
-<br/>
 - RTTI (运行时类型识别)
 
-<br/>
-```c++
-void DrawShape(const Shape& s ){
-    if(s.itsType == Shape::square){
-     static_cast<const Square&>(s).draw()
-    else if (s.itsType == Shape::circle)
-     static_cast<const Circle&>(s).draw()
+```java
+public class Shape {
+    ShapeType itsType;
+    Shape(ShapeType shapeType){
+        itsType = shapeType;
+    }
 }
 ```
+```java
+public class Circle extends Shape{
+    Circle(ShapeType shapeType){
+        super(shapeType);
+    }
+    public void draw(){
+        System.out.println("Draw a circle.");
+    }
+}
+```
+```java
+public class Square extends Shape{
+    Square(ShapeType shapeType){
+        super(shapeType);
+    }
+    public void draw(){
+        System.out.println("Draw a square.");
+    }
+}
+```
+
+---
+
+## LSP Violation (I)
+
+<br/>
+```java
+public class Client {
+
+    public static void drawShape(Shape shape){
+        if(shape.itsType == ShapeType.circle){
+            Circle circle = (Circle)shape;
+            circle.draw();
+        }
+        else if(shape.itsType == ShapeType.square){
+            Square square = (Square)shape;
+            ((Square) shape).draw();
+        }
+    }
+
+    public static void main(String[] args){
+        Shape  s1 = new Circle(ShapeType.circle);
+        Shape  s2 = new Square(ShapeType.square);
+        Client.drawShape(s1);
+        Client.drawShape(s2);
+    }
+}
+```
+
+
 <span style="color:red">增加一种新类型?</span> <!-- .element: class="fragment" -->
 
 
@@ -459,9 +507,9 @@ public class Button{
 
 - 继承的缺点
 
-   + 继承复用破环包装，白箱复用. 
-   + 父类发生变化，子类不得不改变. 
-   + 继承的实现是静态的，不能在运行时改变.  
+   + 继承复用破环包装，白箱复用
+   + 父类发生变化，子类不得不改变 
+   + 继承的实现是静态的，不能在运行时改变  
 
 ---
 
@@ -505,7 +553,7 @@ public class Button{
 <br/>
 - Only talk to your immediate friends
 
-- Don‘t talk to strangers 
+- Don't talk to strangers 
 
 
 ---
