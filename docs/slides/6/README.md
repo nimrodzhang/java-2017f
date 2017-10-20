@@ -1,18 +1,17 @@
 
-# Error Handling with Exceptions
+## Error Handling with Exceptions
 
-## "Badly formed code will not be run."
+#### "Badly formed code will not be run."
 
 ---
 
-## SOLID
+## Outline
 
-
-- SRP (The Single-Responsibility Principle)
-- OCP (The Open-Closed Principle) 
-- LSP (The Liskov Substitution Principle)
-- ISP (The Interface-Segregation Principle) 
-- DIP (The Dependency-Inversion Principle) 
+<br/>
+- Concepts
+- Java Exception Mechanism
+- Exception Guidelines
+- Design by Contract vs. Exceptions 
 
 ---
 
