@@ -66,10 +66,11 @@
 
 <br/>
 
-|          | 义务               | 权益                |
-| -------- |-------------------| -------------------|
-| Client   | 不能混进蛇精蝎子精   | 由小到大给葫芦娃们排序 |
-| Supplier | 帮葫芦娃们由小到大排序| 只排葫芦娃          |
+|   | 义务| 权益|
+| - | - | - |
+| Client  | 不能混进蛇精蝎子精  | 由小到大给葫芦娃们排序 |
+| Supplier| 帮葫芦娃们由小到大排序| 只排葫芦娃 |
+
 
 ---
 
@@ -97,8 +98,8 @@
 
 <br/>
 
-|          | 义务               | 权益                |
-| -------- |-------------------| -------------------|
+|   | 义务| 权益 |
+| - |-| -|
 | Client   | "Satisfy Preconditon": 只排葫芦娃   | "From Postcondition": 葫芦娃们由小到大给排好序 |
 | Supplier | "Satisfy Postconditon": 葫芦娃们由小到大排好序| "From Precondition":只排葫芦娃          |
 
@@ -144,26 +145,156 @@
 
 ## Exceptions in Java
 
-<br/>
-- In Java, the basic exception handling construct is to:
-  + <font color=red>try</font>: a block of code which normally executes ok
-  + <font color=red>catch</font>: any exceptions that it generates, and
-  + <font color=red>finally</font>: do anything we want to do irrespective of what happened before. 
-
----
-
-## Exceptions in Java
-
 - If a thrown exception is <font color=red>not</font> caught, it <font color=red>propagates out</font> to the caller and so on until <font color=yellow>**main**</font>. 
 
 - If it is <font color=red>never</font> caught, it <font color=red>terminates</font> the program.
 
 - If a method can generate (checked) exceptions but does <font color=red>not</font> handle them, it has to explicitly <font color=red>declare</font> that it throws them so that clients know what to expect.
 
+---
+
+## Exceptions in Java
+
+<br/>
+- In Java, the basic exception handling construct is to:
+  + <font color=red>try</font>: a block of code which normally executes ok
+  + <font color=red>catch</font>: any exceptions that it generates, and
+  + <font color=red>finally</font>: do anything we want to do irrespective of what happened before. 
 
 
+---
+
+## Catch Exceptions
+
+<br/>
+```java
+try{
+  //Code that might generate exceptions
+}
+catch (ExceptionType1 e1){
+  //Handle exceptions of ExceptionType1
+}
+catch (ExceptionType2 e2){
+  //Handle exceptions of ExceptionType2
+}
+catch (ExceptionType3 e3){
+  //Handle exceptions of ExceptionType3
+}
+finally{
+  //Activities that happen every time
+}
+```
+
+<span style="color:#0099ff">Termination vs. Resumption</span><!-- .element: class="fragment" -->
+
+---
+
+## Report Exceptions
+
+<br/>
+```java
+public boolean method(int x) throws MyException{
+    //some code
+    throw new MyException(...);
+}
+```
+
+<span style="color:#0099ff">Exception Propagation</span><!-- .element: class="fragment" -->
+
+---
+
+## Create Exceptions
+
+<br/>
+```java
+class SimpleException extends Exception{}
+
+public class InheritingExceptions {
+  public void f() throws SimpleException {
+    System.out.println("Throw SimpleException from f()");
+    throw new SimpleException();
+  }
+
+  public static void main(String[] args){
+    InheritingExceptions sed = new InheritingExceptions();
+    try{
+      sed.f();
+    } catch(SimpleException e){
+      System.out.println("Caught it!");
+    }
+  }
+}
+```
+
+---
+
+## Exceptions and Logging
+
+- 1: Send error output to the *standard error* stream by writing to **System.err**.
+
+```java
+class MyException extends Exception{
+  public MyException(){}
+  public MyException(String msg){super(msg);}
+}
+
+public class FullConstructors {
+  public static void f() throws MyException{
+    System.out.println("Throwing MyException from f()");
+    throw new MyException();
+  }
+  public static void g() throws MyException{
+     System.out.println("Throwing MyException from g()");
+    throw new MyException("Originated in g()");
+  }
+
+  public static void main(String[] args){
+    try{
+      f();
+    } catch(MyException e){
+      e.pringStackTrace(System.out);
+    }
+    try{
+      g();
+    } catch(MyException e){
+      e.printStackTrace(System.out);
+    }
+  }
+}
+```
+<span style="color:red">e.printStackTrace()</span><!-- .element: class="fragment" -->
+
+---
+
+## Exception and Logging
+
+- 2: Log the output using the **java.util.logging** facility.
+
+```java
+import java.util.logging.*;
+import java.io.*;
+
+class LoggingException extends Exception{
+  private static Logger logger = Logger.getLogger("LoggingException");
+  public LoggingException(){
+    StringWriter trace = new StringWriter();
+    printStackTrace(new PrintWriter(trace));
+    logger.severe(trace.toString());
+  }
+}
+
+public class LoggingExceptions{
+  public static void main(String[] args){
+    try{
+      throw new LoggingException();
+    } catch(LoggingException e){
+      System.err.println("Caught "+e);
+    }
+  }
+}
 
 
+```
 
 ---
 
