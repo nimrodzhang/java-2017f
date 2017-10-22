@@ -10,7 +10,6 @@
 <br/>
 - Concepts
 - Java Exception Mechanism
-- Exception Guidelines
 - Design by Contract vs. Exceptions 
 
 ---
@@ -189,9 +188,35 @@ finally{
 
 ---
 
+## Catch Ordering
+
+- All ***catch*** clauses are checked in order. An error occurs if the super-type is arranged before the sub-type.
+
+```java
+class SuperException extends Exception { }
+class SubException extends SuperException { }
+class BadCatch {
+  public void goodTry() {
+    try { 
+      throw new SubException();
+    } catch (SuperException superRef) { 
+      ...
+    } catch (SubException subRef) {
+      ...// never be reached
+    } // an INVALID catch ordering
+  }
+}
+```
+- If exceptions are thrown in current "catch" and "finally", the "catch" clauses will not be rechecked. They are passed to the outside.
+
+---
+
 ## Report Exceptions
 
 <br/>
+
+- Declare and Throw
+
 ```java
 public boolean method(int x) throws MyException{
     //some code
@@ -224,6 +249,63 @@ public class InheritingExceptions {
     }
   }
 }
+```
+
+---
+
+## Getting information from exceptions
+
+- java.lang.Throwable
+```java
+public String getMessage();
+public String toString();
+public void printStackTrace();
+```
+
+---
+
+## Rethrowing exceptions
+
+<br/>
+```java
+try {
+  // some statements;
+}
+catch(TheException ex) {
+  //perform operations before exits;
+  throw ex;
+}
+
+```
+
+---
+
+## Chained Exception
+
+<br/>
+```java
+public class ChainedExceptionDemo {
+  public static void main(String[] args) {
+    try {
+      method1();
+    }
+    catch (Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+  public static void method1() throws Exception {
+    try {
+      method2();
+    }
+    catch (Exception ex) {
+      throw new Exception("New info from method1", ex);
+    }
+  }
+  public static void method2() throws Exception {
+      throw new Exception("New info from method2");
+  }
+}
+
 ```
 
 ---
@@ -293,8 +375,71 @@ public class LoggingExceptions{
   }
 }
 
-
 ```
+
+---
+
+## Classification of Errors
+
+- <font color=red>*Syntax errors*</font> arise because the rules of the language have not been followed. They are detected by the compiler.
+
+- <font color=red>*Runtime errors*</font> occur while the program is running if the environment detects an operation that is impossible to carry out.
+
+- <font color=red>*Logic errors*</font> occur when a program doesn't perform the way it was intended to.
+
+---
+
+## Java Exceptions
+
+<br/>
+![](http://www.plantuml.com/plantuml/png/XP5D3e8m44RtFGKNu0Pkq6X2ejGOekjIHbejhMcdaOM7D_m4J96mQx_t9fEPeSK3E4QRJnn7kR3cpGe5P7prODzmUA4qUWQiDPQCk0ztYZcN6JmOhykfDB1IkeYIMxx8A0gmO-P2VF4QPGrJEGcJeOMLA6f0oIVrlvbvfSv6Qlnfkw2ckeI6UgJtRJkwM_MLWegfn5Q-1erhUZTwY1mXtH5wvIZrarKmd6NAhzAYP-h4k91wZjk5Xrc_wFRllW00)
+
+---
+
+## System Errors
+
+<br/>
+- <font color=red>System errors</font> are thrown by JVM and represented in the <font color=yellow>***Error***</font> class. The <font color=yellow>***Error***</font> class describes internal system errors. Such errors rarely occur.
+- If one does, there is little you can do beyond
+notifying the user and trying to terminate the
+program gracefully.
+
+---
+
+## Exceptions
+
+<br/>
+- <font color=red>Exceptions</font> are represented in the <font color=yellow>***Exception***</font> class that describes errors caused by your program and external circumstances. These errors can be caught and handled by your program.
+
+---
+
+## Runtime Exceptions
+
+<br/>
+- <font color=red>Runtime exceptions</font> are represented in the
+<font color=yellow>***RuntimeException***</font> class that describes programming
+errors, such as bad casting, accessing an out-of-bounds
+array, and numeric errors.
+
+---
+
+## Checked Exceptions vs. Unchecked Exceptions
+
+- ***RuntimeException***, ***Error*** and their subclasses are known as <font color=red>unchecked exceptions</font>.
+   - In most cases, unchecked exceptions reflect programming logic errors that are not recoverable.
+     - For example: *NullPointerException*,
+*IndexOutOfBoundsException*
+   - These are the logic errors that should be corrected in the program. Unchecked exceptions can occur anywhere in the program. To avoid cumbersome overuse of try-catch blocks, Java does not mandate you to write code to catch unchecked exceptions.
+
+---
+
+## Checked Exceptions vs. Unchecked Exceptions
+
+- All other exceptions are known as <font color=red>checked
+exceptions</font>, meaning that the compiler forces the
+programmer to check and deal with the exceptions.
+
+
 
 ---
 
