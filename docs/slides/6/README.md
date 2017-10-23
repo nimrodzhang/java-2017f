@@ -46,9 +46,9 @@
 
 <br/>
 - Every software element is intended to satisfy a certain <font color=red>goal</font>, for the benefit of other software elements (and ultimately of human users). 
-- This goal is the element’s <font color=red>contract</font>.  契约
+- This goal is the element’s <font color=red>contract</font>.  
   + The contract of any software element should be
-<font color=red>Explicit</font>. 显式
+<font color=red>Explicit</font>. 
   + Part of the software element itself.
 
 ---
@@ -76,10 +76,10 @@
 ## Properties of Contracts
 
 <br/>
-- Binds two parties (or more): supplier, client. 绑定双方或多方
-- Is explicit (written). 显式的
-- Specifies mutual obligations and benefits. 规定相互的义务和权益
-- Usually maps obligation for one of the parties into benefit for the other, and conversely. 一方的义务对应另一方的权益，反之亦然
+- Binds two parties (or more): supplier, client.
+- Is explicit (written).
+- Specifies mutual obligations and benefits. 
+- Usually maps obligation for one of the parties into benefit for the other, and conversely. 
 
 ---
 
@@ -108,9 +108,9 @@
 ## Exception Handling and DbC
 
 <br/>
-- Exceptions are about dealing with things going wrong at runtime.
+- Exceptions are about dealing with things going wrong at <font color=red>runtime</font>.
 
-- DbC is about statically defining the conditions under which code is supposed to operate. 
+- DbC is about <font color=red>statically</font> defining the conditions under which code is supposed to operate. 
 
 ---
 
@@ -133,10 +133,10 @@
 
 - Ideally, a language (and its implementation) should:
 
-  +  <font color=red>Restrict</font> the set of possible exceptions to “reasonable” ones.
-  + Indicate <font color=red>where</font> they happened, and <font color=red>distinguish</font> between them.
-  + Allow exceptions to be dealt with in a <font color=red>different</font> place in the code from where they occur.
-  + so we <font color=yellow>throw</font> exceptions where they <font color=red>occur</font>, and <font color=yellow>catch</font> them where we want to <font color=red>deal with</font> them.
+  +  <font size=6><font color=red>Restrict</font> the set of possible exceptions to “reasonable” ones.</font>
+  + <font size=6>Indicate <font color=red>where</font> they happened, and <font color=red>distinguish</font> between them.</font>
+  + <font size=6>Allow exceptions to be dealt with in a <font color=red>different</font> place in the code from where they occur.</font>
+  + <font size=6>so we <font color=yellow>throw</font> exceptions where they <font color=red>occur</font>, and <font color=yellow>catch</font> them where we want to <font color=red>deal with</font> them.</font>
 
 
 ---
@@ -213,6 +213,13 @@ class BadCatch {
   }
 }
 ```
+
+---
+
+## Catch Ordering
+
+<br/>
+
 - If exceptions are thrown in current "catch" and "finally", the "catch" clauses will not be rechecked. They are passed to the outside.
 
 ---
@@ -330,7 +337,7 @@ public class ChainedExceptionDemo {
 
 ## Chained Exception
 
-![](http://yp.njuics.cn:7911/exceptions.jpg)
+![](http://yp.njuics.cn:7911/exceptions.jpg)<!-- .element height="60%" width="60%" -->
 
 ---
 
@@ -407,7 +414,7 @@ public class FullConstructors {
   }
 }
 ```
-<span style="color:red">e.printStackTrace()</span><!-- .element: class="fragment" -->
+<span style="color:red"><font size=6>e.printStackTrace()</font></span><!-- .element: class="fragment" -->
 
 ---
 
@@ -509,10 +516,61 @@ programmer to check and deal with the exceptions.
 
 ## Tips
 
-- Exception Handling is not supposed to replace a simple test.
+- Exception handling is not supposed to replace a simple test.
+
+case a:
+```java
+If (!s.empty()) s.pop();
+
+```
+case b:
+```java
+try { //10 times longer than (a)
+   s.pop();
+}
+catch (EmptyStackException e){
+}
+```
+<span style="color:red">Which one is better?</span><!-- .element: class="fragment" -->
+
+---
+
+## Tips
+
 - Do not micromanage exceptions.
+
+```java
+for (i=0 ; i<100; i++) {
+  try { n=s.pop(); }
+  catch (EmptyStackException s) {//stack was empty}
+  try { out.writeInt(n); }
+  catch (IOException e) {//problem reading file}
+}
+
+```
+```java
+try { 
+  for (i=0 ; i<100; i++) { 
+    n=s.pop(); out.writeInt(n);
+  }
+}
+catch (IOException e) {
+  //problem reading file
+}
+catch (EmptyStackException s) {
+  //stack was empty
+}
+
+```
+<span style="color:red">Which one is better?</span><!-- .element: class="fragment" -->
+
+---
+
+## Tips
+
+<br/>
 - Create custom exception classes if the predefined classes are not sufficient.
-- Calculate some alternative result instead of what the method was supposed to 
+- Calculate some alternative result instead of what the method was supposed to.
 
 ---
 
@@ -528,7 +586,7 @@ programmer to check and deal with the exceptions.
 
 ## How about assertion?
 
-**To be continued later!**
+**To be continued!**
 
 ---
 
