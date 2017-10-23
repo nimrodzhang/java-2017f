@@ -138,7 +138,13 @@
   + Allow exceptions to be dealt with in a <font color=red>different</font> place in the code from where they occur.
   + so we <font color=yellow>throw</font> exceptions where they <font color=red>occur</font>, and <font color=yellow>catch</font> them where we want to <font color=red>deal with</font> them.
 
-<span style="color:#0099ff">Ideally, we don't want non-fatal exceptions to be thrown too far — this breaks up the modularity of the program and makes it hard to reason about.</span><!-- .element: class="fragment" -->
+
+---
+
+## What do we want of exceptions?
+
+<br/>
+- Ideally, we don't want non-fatal exceptions to be thrown too far — this breaks up the modularity of the program and makes it hard to reason about.
 
 ---
 
@@ -256,10 +262,22 @@ public class InheritingExceptions {
 ## Getting information from exceptions
 
 - java.lang.Throwable
+
+```java
+public Throwable();
+public Throwable(String message);
+public Throwable(String message, Throwable cause);
+public Throwable(Throwable cause);
+
+```
+
+
 ```java
 public String getMessage();
+public String getLocalizedMessage();
 public String toString();
 public void printStackTrace();
+
 ```
 
 ---
@@ -307,6 +325,51 @@ public class ChainedExceptionDemo {
 }
 
 ```
+
+---
+
+## Chained Exception
+
+![](http://yp.njuics.cn:7911/exceptions.jpg)
+
+---
+
+## Exception matching
+
+- When an exception is thrown, the exception-handling system looks through the <font color=red>"nearest"</font> handlers in the order they are written. When it finds a match, the exception is considered handled, and no further serarching occurs.
+
+- A derived-class object will match a handler for the base class.
+
+---
+
+## Example
+
+<br/>
+```java
+
+class Annoyance extends Exception{}
+class Sneeze extends Annoyance{}
+
+public class Human{
+  public static void main(String[] args){
+    try{
+      throw new Sneeze();
+    } catch(Sneeze s){
+      System.out.println("Caught Sneeze");
+    } catch(Annoyance a){
+      System.out.println("Caught Annoyance");
+    }
+
+    try{
+      throw new Sneeze();
+    } catch(Annoyance a){
+      System.out.println("Caught Annoyance");
+    }
+  }
+}
+
+```
+
 
 ---
 
@@ -429,17 +492,43 @@ array, and numeric errors.
    - In most cases, unchecked exceptions reflect programming logic errors that are not recoverable.
      - For example: *NullPointerException*,
 *IndexOutOfBoundsException*
-   - These are the logic errors that should be corrected in the program. Unchecked exceptions can occur anywhere in the program. To avoid cumbersome overuse of try-catch blocks, Java does not mandate you to write code to catch unchecked exceptions.
+
 
 ---
 
 ## Checked Exceptions vs. Unchecked Exceptions
+
+- These are the logic errors that should be corrected in the program. Unchecked exceptions can occur anywhere in the program. To avoid cumbersome overuse of try-catch blocks, Java does not mandate you to write code to catch unchecked exceptions.
 
 - All other exceptions are known as <font color=red>checked
 exceptions</font>, meaning that the compiler forces the
 programmer to check and deal with the exceptions.
 
 
+---
+
+## Tips
+
+- Exception Handling is not supposed to replace a simple test.
+- Do not micromanage exceptions.
+- Create custom exception classes if the predefined classes are not sufficient.
+- Calculate some alternative result instead of what the method was supposed to 
+
+---
+
+## DbC vs. Exception
+
+- Exceptions are about dealing with things going wrong at runtime.
+- DbC is about statically defining the conditions under which code is supposed to operate.
+- The two are nicely complementary.
+- <font color=red>Unchecked exceptions</font> are “what happens when the contract is broken”.
+- <font color=red>Checked exceptions</font> are expected to happen from time to time, so are not contract violations. 
+
+---
+
+## How about assertion?
+
+**To be continued later!**
 
 ---
 
