@@ -120,8 +120,8 @@
   + <font color=green>User mis-types input</font>
   + <font color=green>Web page not available</font>
   + <font color=green>File not found</font>
-  + <font color=yellow>Array index out of bounds</font>
-  + <font color=yellow>Method called on a null object</font>
+  + <font color=#0099ff>Array index out of bounds</font>
+  + <font color=#0099ff>Method called on a null object</font>
   + <font color=pink>Out of memory</font>
   + <font color=pink>Bug in the actual language implementation</font>
 
@@ -136,7 +136,7 @@
   +  <font size=6><font color=red>Restrict</font> the set of possible exceptions to “reasonable” ones.</font>
   + <font size=6>Indicate <font color=red>where</font> they happened, and <font color=red>distinguish</font> between them.</font>
   + <font size=6>Allow exceptions to be dealt with in a <font color=red>different</font> place in the code from where they occur.</font>
-  + <font size=6>so we <font color=yellow>throw</font> exceptions where they <font color=red>occur</font>, and <font color=yellow>catch</font> them where we want to <font color=red>deal with</font> them.</font>
+  + <font size=6>so we <font color=#0099ff>throw</font> exceptions where they <font color=red>occur</font>, and <font color=#0099ff>catch</font> them where we want to <font color=red>deal with</font> them.</font>
 
 
 ---
@@ -150,7 +150,7 @@
 
 ## Exceptions in Java
 
-- If a thrown exception is <font color=red>not</font> caught, it <font color=red>propagates out</font> to the caller and so on until <font color=yellow>**main**</font>. 
+- If a thrown exception is <font color=red>not</font> caught, it <font color=red>propagates out</font> to the caller and so on until <font color=#0099ff>**main**</font>. 
 
 - If it is <font color=red>never</font> caught, it <font color=red>terminates</font> the program.
 
@@ -469,7 +469,7 @@ public class LoggingExceptions{
 ## System Errors
 
 <br/>
-- <font color=red>System errors</font> are thrown by JVM and represented in the <font color=yellow>***Error***</font> class. The <font color=yellow>***Error***</font> class describes internal system errors. Such errors rarely occur.
+- <font color=red>System errors</font> are thrown by JVM and represented in the <font color=#0099ff>***Error***</font> class. The <font color=#0099ff>***Error***</font> class describes internal system errors. Such errors rarely occur.
 - If one does, there is little you can do beyond
 notifying the user and trying to terminate the
 program gracefully.
@@ -479,7 +479,7 @@ program gracefully.
 ## Exceptions
 
 <br/>
-- <font color=red>Exceptions</font> are represented in the <font color=yellow>***Exception***</font> class that describes errors caused by your program and external circumstances. These errors can be caught and handled by your program.
+- <font color=red>Exceptions</font> are represented in the <font color=#0099ff>***Exception***</font> class that describes errors caused by your program and external circumstances. These errors can be caught and handled by your program.
 
 ---
 
@@ -487,7 +487,7 @@ program gracefully.
 
 <br/>
 - <font color=red>Runtime exceptions</font> are represented in the
-<font color=yellow>***RuntimeException***</font> class that describes programming
+<font color=#0099ff>***RuntimeException***</font> class that describes programming
 errors, such as bad casting, accessing an out-of-bounds
 array, and numeric errors.
 
