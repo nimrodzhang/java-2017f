@@ -539,28 +539,24 @@ catch (EmptyStackException e){
 
 - Do not micromanage exceptions.
 
+
 ```java
 for (i=0 ; i<100; i++) {
   try { n=s.pop(); }
-  catch (EmptyStackException s) {//stack was empty}
+  catch (EmptyStackException s) {...}
   try { out.writeInt(n); }
-  catch (IOException e) {//problem reading file}
+  catch (IOException e) {...}
 }
 
 ```
+
+case b:
 ```java
 try { 
-  for (i=0 ; i<100; i++) { 
-    n=s.pop(); out.writeInt(n);
-  }
+  for (i=0 ; i<100; i++) { n=s.pop(); out.writeInt(n);}
 }
-catch (IOException e) {
-  //problem reading file
-}
-catch (EmptyStackException s) {
-  //stack was empty
-}
-
+catch (IOException e) {...}
+catch (EmptyStackException s) {...}
 ```
 <span style="color:red">Which one is better?</span><!-- .element: class="fragment" -->
 
