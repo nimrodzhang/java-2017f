@@ -7,7 +7,7 @@
 
 ## Happy Programmers' Day!
 
-![](http://yp.njuics.cn:7911/1024.jpg)
+![](http://yp.njuics.cn:7911/1024.jpg)<!-- .element height="60%" width="60%" -->
 
 ---
 
@@ -588,7 +588,7 @@ catch (EmptyStackException s) {...}
 
 ## Think about...
 
-![](http://yp.njuics.cn:7911/1024-2.JPG)
+![](http://yp.njuics.cn:7911/1024-2.JPG)<!-- .element height="60%" width="60%" -->
 
 
 ---
