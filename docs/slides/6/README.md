@@ -5,6 +5,12 @@
 
 ---
 
+## Happy Programmers' Day!
+
+![](http://yp.njuics.cn:7911/1024.jpg)
+
+---
+
 ## Outline
 
 <br/>
@@ -577,6 +583,13 @@ catch (EmptyStackException s) {...}
 - The two are nicely complementary.
 - <font color=red>Unchecked exceptions</font> are “what happens when the contract is broken”.
 - <font color=red>Checked exceptions</font> are expected to happen from time to time, so are not contract violations. 
+
+---
+
+## Think about...
+
+![](http://yp.njuics.cn:7911/1024-2.JPG)
+
 
 ---
 
