@@ -309,11 +309,11 @@ Java supports introspection through its reflection library
 
 ## 有啥用？ 
 
-Rapid Application Development (RAD)
-Visual approach to GUI development
-Requires information about component at run-time
-Remote Method Invocation (RMI)
-Distributed objects
+- Rapid Application Development (RAD)
+- Visual approach to GUI development
+- Requires information about component at run-time
+- Remote Method Invocation (RMI)
+- Distributed objects
 
 
 
