@@ -65,9 +65,15 @@ public class Queue {
         Huluwa[] brothers = new Huluwa[7];
         for (int i = 0; i < brothers.length; i++) {
             brothers[i] = new Huluwa(COLOR.values()[i], SENIORITY.values()[i]);
+
         }
 
         Queue queue = new Queue(brothers);
+
+        Class c = queue.getClass();
+
+        c.isInstance(queue);
+        
 
         queue.rollCall();
 

@@ -1,7 +1,9 @@
 
-# 设计原则
+# 设计原则 
 
 ## Change is the eternal truth.
+
+🚺
 
 ---
 
@@ -65,7 +67,7 @@ interface Modem{
 
 ---
 
-## OCP 开放封闭原则
+## OCP 开放封闭原则 
 
 <br/>
 - Software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification.

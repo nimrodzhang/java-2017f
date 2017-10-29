@@ -3,6 +3,8 @@
 
 #### "Badly formed code will not be run."
 
+🚺
+
 ---
 
 ## Happy Programmers' Day!
