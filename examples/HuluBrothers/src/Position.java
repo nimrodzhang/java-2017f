@@ -1,15 +1,7 @@
 public class Position {
 
     private int x;
-    private int y;
 
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
 
 
     public Creature getHolder() {
@@ -30,9 +22,8 @@ public class Position {
         this.x = x;
     }
 
-    public Position(int x, int y){
+    public Position(int x){
         super();
         this.x = x;
-        this.y = y;
     }
 }

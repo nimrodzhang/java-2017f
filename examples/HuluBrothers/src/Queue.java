@@ -70,11 +70,6 @@ public class Queue {
 
         Queue queue = new Queue(brothers);
 
-        Class c = queue.getClass();
-
-        c.isInstance(queue);
-        
-
         queue.rollCall();
 
         queue.shuffle();
