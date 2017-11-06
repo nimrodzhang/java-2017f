@@ -149,7 +149,7 @@ s = st.pop();
 
 - The ***Collection*** interface is the root interface for manipulating a collection of objects
 
-![](http://yp.njuics.cn:7911/Collection.jpeg)<!-- .element height="60%" width="70%" -->
+![](http://yp.njuics.cn:7911/Collection.jpeg)<!-- .element height="60%" width="60%" -->
 
 
 ---
@@ -224,7 +224,7 @@ public class SimpleCollection{
 
 - Vector(legacy), LinkedList, HashMap
 
-![](http://yp.njuics.cn:7911/Lists.jpeg)<!-- .element height="60%" width="70%" -->
+![](http://yp.njuics.cn:7911/Lists.jpeg)<!-- .element height="70%" width="70%" -->
 
 ---
 
@@ -296,13 +296,13 @@ Collections.shuffle(arrayList);
 
 ## The List Interface
 
-![](http://yp.njuics.cn:7911/List.jpeg)<!-- .element height="60%" width="80%" -->
+![](http://yp.njuics.cn:7911/List.jpeg)<!-- .element height="70%" width="70%" -->
 
 ---
 
 ## The List Iterator
 
-![](http://yp.njuics.cn:7911/ListIterator.jpeg)<!-- .element height="60%" width="80%" -->
+![](http://yp.njuics.cn:7911/ListIterator.jpeg)<!-- .element height="70%" width="70%" -->
 
 ---
 
@@ -331,7 +331,7 @@ Collections.shuffle(arrayList);
 ## LinkedList
 
 <br/>
-![](http://yp.njuics.cn:7911/LinkedList.jpeg)<!-- .element height="60%" width="80%" -->
+![](http://yp.njuics.cn:7911/LinkedList.jpeg)<!-- .element height="70%" width="70%" -->
 
 ---
 
@@ -381,7 +381,7 @@ public static void main(String[] args) {
 
 ## The Vector Class
 
-![](http://yp.njuics.cn:7911/Vector.jpeg)<!-- .element height="60%" width="70%" -->
+![](http://yp.njuics.cn:7911/Vector.jpeg)<!-- .element height="70%" width="70%" -->
 
 ---
 
@@ -410,7 +410,7 @@ public class Polygon{ // 存储多边形顶点的Point表
 
 - The ***Stack*** class represents a last-in-first-out stack of objects. The elements are accessed only from the top of the stack. You can retrieve, insert, or remove an element from the top of the stack.
 
-![](http://yp.njuics.cn:7911/Stack.jpeg)<!-- .element height="60%" width="70%" -->
+![](http://yp.njuics.cn:7911/Stack.jpeg)<!-- .element height="70%" width="70%" -->
 
 ---
 
@@ -629,7 +629,7 @@ public class TestTreeSetWithComparator {
 
 ## The Map Interface UML Diagram
 
-![](http://yp.njuics.cn:7911/Map.jpeg)<!-- .element height="60%" width="80%" -->
+![](http://yp.njuics.cn:7911/Map.jpeg)<!-- .element height="70%" width="70%" -->
 
 ---
 
