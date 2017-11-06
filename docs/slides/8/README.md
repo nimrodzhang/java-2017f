@@ -1,17 +1,54 @@
 
 ## Java Collections Framework
 
+#### "Holding your objects"
 
 🚺
 
 ---
 
-## Outline
+## Java Generics
 
-<br/>
-- Holding your objects
-- Arrays
-- Containers in depth 
+- A way to control a class type definitions
+- Otherwise known as *parameterised types* or *templates*
+- A way of improving the clarity of code
+- A way of avoiding (**casts**) in code, turning run-time errors (typically **ClassCastException**) into compile-time errors.
+
+---
+
+## No Generics vs. Generics
+
+Java 1.0 Version
+```java
+class Stack{
+  void push(Object o){...}
+  Object pop(){...}
+}
+String s = "Hello";
+Stack st = new Stack();
+...
+st.push(s);
+...
+s = (String)st.pop();
+```
+
+---
+
+## No Generics vs. Generics
+
+Java Generics Version
+```java
+class Stack<A>{
+  void push(A a){...}
+  A pop(){...}
+}
+String s = "Hello";
+Stack<String> st = new Stack<String>();
+st.push(s);
+...
+s = st.pop();
+
+```
 
 ---
 
@@ -21,42 +58,42 @@
 - Manipulate grouped data as a single object
   + Java provides List, Set, Map
   + add, contains, remove, size, loop over, sort, ...
-
 - Insulate programmer from implementation
   + array, linked list, hash table, balanced binary tree
-
-- A Java collection is any class that holds objects and implements the ***Collection*** interface
-  + For example, the ***ArrayList<T>*** class is a Java collection class, and implements all the methods in the ***Collection*** interface.
+- A Java collection is any class that holds objects and implements the <font color=red>Collection</font> interface
   + Collections are used along with iterators.
 
 ---
 
 ## Collection Framework
 
-- A **collection framework** is a unified architecture for representing and manipulating collections. It has:
-  + **Interfaces**: abstract data types representing collections
-  + **Implementations**: concrete implementations of the collection interfaces
-  + **Algorithms**: methods that perform useful computations, such as searching and sorting
-    + These algorithms are said to be *polymorphic*: the same method can be used on different implementations
+- A <font color=red>collection framework</font> is a unified architecture for representing and manipulating collections. It has:
+  + <font color=red>Interfaces</font>: abstract data types representing collections
+  + <font color=red>Implementations</font>: concrete implementations of the collection interfaces
+  + <font color=red>Algorithms</font>: methods that perform useful computations, such as searching and sorting
 
 ---
 
 ## Collection Framework
 
-![](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1509882696522&di=800f9f7d8572eaf6cda169bf91a5decc&imgtype=jpg&src=http%3A%2F%2Fimg2.imgtn.bdimg.com%2Fit%2Fu%3D1284418618%2C721281437%26fm%3D214%26gp%3D0.jpg)
+![](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1509882696522&di=800f9f7d8572eaf6cda169bf91a5decc&imgtype=jpg&src=http%3A%2F%2Fimg2.imgtn.bdimg.com%2Fit%2Fu%3D1284418618%2C721281437%26fm%3D214%26gp%3D0.jpg)<!-- .element height="60%" width="60%" -->
 
 ---
 
 ## Java Collection Framework Hierarchy
 
 - A *collection* is a container object that represents a group of objects, often referred to as *elements*.
-  + **Set** and **List** are subinterfaces of Collection.
+  + <font color=red>Set</font> and <font color=red>List</font> are subinterfaces of Collection.
+
+![](http://yp.njuics.cn:7911/CollectionHierarchy.jpeg)
 
 ---
 
 ## Java Collection Framework Hierarchy
 
-- An instance of **Map** represents a group of objects, each of which is associated with a key. You can get the object from a map using a key, and you have to use a key to put the object into the map.
+- An instance of <font color=red>Map</font> represents a group of objects, each of which is associated with a key. You can get the object from a map using a key, and you have to use a key to put the object into the map.
+
+![](http://yp.njuics.cn:7911/MapHierarchy.jpeg)
 
 ---
 
@@ -111,6 +148,8 @@
 ## The Collection Interface
 
 - The Collection interface is the root interface for manipulating a collection of objects
+
+![](http://yp.njuics.cn:7911/Collection.jpeg)
 
 
 ---
@@ -185,6 +224,7 @@ public class SimpleCollection{
 
 - Vector, LinkedList, HashMap
 
+![](http://yp.njuics.cn:7911/Lists.jpeg)
 
 ---
 
@@ -255,10 +295,13 @@ Collections.shuffle(arrayList);
 
 ## The List Interface
 
+![](http://yp.njuics.cn:7911/List.jpeg)
 
 ---
 
 ## The List Iterator
+
+![](http://yp.njuics.cn:7911/ListIterator.jpeg)
 
 ---
 
@@ -279,6 +322,7 @@ Collections.shuffle(arrayList);
 
 ## LinkedList
 
+![](http://yp.njuics.cn:7911/LinkedList.jpeg)
 
 ---
 
@@ -326,6 +370,7 @@ public static void main(String[] args) {
 
 ## The Vector Class
 
+![](http://yp.njuics.cn:7911/Vector.jpeg)
 
 ---
 
@@ -354,6 +399,7 @@ public class Polygon{ // 存储多边形顶点的Point表
 
 - The Stack class represents a last-in-first-out stack of objects. The elements are accessed only from the top of the stack. You can retrieve, insert, or remove an element from the top of the stack.
 
+![](http://yp.njuics.cn:7911/Stack.jpeg)
 
 ---
 
@@ -531,6 +577,8 @@ public class TestTreeSetWithComparator {
 
 ## The Map Interface UML Diagram
 
+![](http://yp.njuics.cn:7911/Map.jpeg)
+
 ---
 
 ## HashMap, TreeMap and LinkedHashMap
@@ -595,6 +643,14 @@ public class CountOccurrenceOfWords {
 ---
 
 ## Summary
+
+![](http://yp.njuics.cn:7911/Summary.jpeg)
+
+---
+
+## Rewrite 葫芦娃 with Collection Framework
+
+
 
 ---
 
