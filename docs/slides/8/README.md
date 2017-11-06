@@ -85,7 +85,7 @@ s = st.pop();
 - A *collection* is a container object that represents a group of objects, often referred to as *elements*.
   + <font color=red>Set</font> and <font color=red>List</font> are subinterfaces of Collection.
 
-![](http://yp.njuics.cn:7911/CollectionHierarchy.jpeg)
+![](http://yp.njuics.cn:7911/CollectionHierarchy.jpeg)<!-- .element height="60%" width="60%" -->
 
 ---
 
@@ -93,7 +93,7 @@ s = st.pop();
 
 - An instance of <font color=red>Map</font> represents a group of objects, each of which is associated with a key. You can get the object from a map using a key, and you have to use a key to put the object into the map.
 
-![](http://yp.njuics.cn:7911/MapHierarchy.jpeg)
+![](http://yp.njuics.cn:7911/MapHierarchy.jpeg)<!-- .element height="60%" width="60%" -->
 
 ---
 
@@ -124,12 +124,12 @@ s = st.pop();
 ## Collection Interfaces
 
 - Collection
-  + Enables you to work with collections. <<Top of Collection Hierarchy>>
+  + Enables you to work with collections. 
 
 - List
-  + Extends Collection to handle List of elements [objects]
-  + Allows *duplicate* elements in the list
-  + Uses *indexing* technique starting with 0 to access elements
+  + Extends ***Collection*** to handle List of elements [objects]
+  + Allows <font color=red>*duplicate*</font> elements in the list
+  + Uses <font color=red>*indexing*</font> technique starting with 0 to access elements
 
 
 ---
@@ -137,26 +137,26 @@ s = st.pop();
 ## Collection Interfaces
 
 - Set
-  + Extends Collection to handle set of elements [objects], which must contain *unique elements*
+  + Extends ***Collection*** to handle set of elements [objects], which must contain <font color=red>*unique elements*</font>
 
 - SortedSet
-   + Extends Set to handle sorted elements in a set
+   + Extends ***Set*** to handle sorted elements in a set
 
 
 ---
 
 ## The Collection Interface
 
-- The Collection interface is the root interface for manipulating a collection of objects
+- The ***Collection*** interface is the root interface for manipulating a collection of objects
 
-![](http://yp.njuics.cn:7911/Collection.jpeg)
+![](http://yp.njuics.cn:7911/Collection.jpeg)<!-- .element height="60%" width="70%" -->
 
 
 ---
 
-## A not on iterators
+## A note on iterators
 
-- An iterator is an object that enables you to traverse through a collection and to remove elements from the collection and to remove elements from the collection by calling its iterator() method. 
+- An iterator is an object that enables you to traverse through a collection and to remove elements from the collection and to remove elements from the collection by calling its *iterator()* method. 
 
 ```java
 public interface Iterator<E>{
@@ -166,6 +166,7 @@ public interface Iterator<E>{
 }
 
 ```
+<span style="color:#0099ff">Another Design Pattern</span><!-- .element: class="fragment" -->
 
 ---
 
@@ -212,7 +213,6 @@ public class SimpleCollection{
   + implements all methods of the interface
   + selects appropriate instance variables
   + can be instantiated
-
 - Java implements interfaces with
   + List: ArrayList, LinkedList, Vector
   + Map: HashMap, TreeMap
@@ -222,9 +222,9 @@ public class SimpleCollection{
 
 ## Implementations in Java Collection Framework
 
-- Vector, LinkedList, HashMap
+- Vector(legacy), LinkedList, HashMap
 
-![](http://yp.njuics.cn:7911/Lists.jpeg)
+![](http://yp.njuics.cn:7911/Lists.jpeg)<!-- .element height="60%" width="70%" -->
 
 ---
 
@@ -242,7 +242,7 @@ public class SimpleCollection{
 
 ## Utility Classes -1 
 
-- Collections class
+- <font color=red>**java.util.Collections**</font> class
 - Static methods:
   + sort (List)
   + binarySearch (List, Object)
@@ -253,6 +253,7 @@ public class SimpleCollection{
   + min (Collection)
   + max (Collection)
   + synchronizedX, unmodifiableX factory methods
+  + ...
 
 ---
 
@@ -271,13 +272,13 @@ Collections.shuffle(arrayList);
 
 ## Utility Classes -2
 
-- Arrays class
+- <font color=red>**java.util.Arrays**</font> class
 - Static methods that act on Java arrays:
   + sort
   + binarySearch
   + equals
   + fill
-  + asList // returns an ArrayList composed of this array's contents
+  + asList: returns an ArrayList composed of this array's contents
 
 ---
 
@@ -295,13 +296,13 @@ Collections.shuffle(arrayList);
 
 ## The List Interface
 
-![](http://yp.njuics.cn:7911/List.jpeg)
+![](http://yp.njuics.cn:7911/List.jpeg)<!-- .element height="60%" width="80%" -->
 
 ---
 
 ## The List Iterator
 
-![](http://yp.njuics.cn:7911/ListIterator.jpeg)
+![](http://yp.njuics.cn:7911/ListIterator.jpeg)<!-- .element height="60%" width="80%" -->
 
 ---
 
@@ -310,19 +311,27 @@ Collections.shuffle(arrayList);
 - ArrayList
   + a resizable-array implementation like Vector
     + unsynchronized, and without legacy methods
+    
 - LinkedList
-  + a doubly-linked list implementation
+  + a ***doubly-linked*** list implementation
   + May provide better performance that ArrayList
     + if elements frequently inserted/deleted within the List
   + For queues and double-ended queuse (deques)
+
+---
+
+## List Implementations
+
+<br/>
 - Vector
-  + a synchronized resizable-array implementationo f a List with additional "legacy" methods.
+  + a synchronized resizable-array implementation of a List with additional "legacy" methods.
 
 ---
 
 ## LinkedList
 
-![](http://yp.njuics.cn:7911/LinkedList.jpeg)
+<br/>
+![](http://yp.njuics.cn:7911/LinkedList.jpeg)<!-- .element height="60%" width="80%" -->
 
 ---
 
@@ -362,15 +371,17 @@ public static void main(String[] args) {
 
 ## The Vector Class
 
-- The Java Collections Framework was introducde with Java 2. Several data structures were supported prior to Java 2. Among them are the Vector class and the Stack class.
+- The Java Collections Framework was introducde with Java 2. Several data structures were supported prior to Java 2. Among them are the ***Vector*** class and the ***Stack*** class.
 
-- In Java 2, Vector is the same as ArrayList, except that Vector contains the synchronized methods for accessing and modifying the vector.
+- In Java 2, ***Vector*** is the same as ArrayList, except that Vector contains the synchronized methods for accessing and modifying the vector.
+
+-  If a thread-safe implementation is not needed, it is recommended to use ***ArrayList*** in place of Vector.
 
 ---
 
 ## The Vector Class
 
-![](http://yp.njuics.cn:7911/Vector.jpeg)
+![](http://yp.njuics.cn:7911/Vector.jpeg)<!-- .element height="60%" width="70%" -->
 
 ---
 
@@ -397,9 +408,9 @@ public class Polygon{ // 存储多边形顶点的Point表
 
 ## The Stack Class
 
-- The Stack class represents a last-in-first-out stack of objects. The elements are accessed only from the top of the stack. You can retrieve, insert, or remove an element from the top of the stack.
+- The ***Stack*** class represents a last-in-first-out stack of objects. The elements are accessed only from the top of the stack. You can retrieve, insert, or remove an element from the top of the stack.
 
-![](http://yp.njuics.cn:7911/Stack.jpeg)
+![](http://yp.njuics.cn:7911/Stack.jpeg)<!-- .element height="60%" width="70%" -->
 
 ---
 
@@ -424,9 +435,48 @@ public class Borrow{ // has borrowed something
       return ret; 
     } 
 }
-
-
 ```
+
+---
+
+## Queue
+
+- A *queue* is typically a "first-in, first-out" (FIFO) container.
+- Queues are commonly used as a way to reliably transfer objects from one area of a program to another.
+- A ***LinkedList*** can be used as a **Queue** implementation.
+
+---
+
+## Example
+
+```java
+public class QueueDemo{
+  public static void printQ(Queue queue){
+    while (queue.peek()!=null) 
+       System.out.print(queue.remove()+"  ");
+    System.out.println();
+  }
+  public static void main(String[] args){
+    Queue<Integer> queue = new LinkedList<Integer>();
+    Random rand = new Random(47);
+    for (int i=0;i<10;i++)
+      queue.offer(rand.nextInt(i+10));
+    printQ(queue);
+    Queue<Character> qc = new LinkedList<Character>();
+    for (char c : "Brontosaurus".toCharArray())
+      qc.offer(c);
+    printQ(qc);
+  }
+}
+```
+
+---
+
+## PriorityQueue
+
+- A *priority queue* says that the element that goes next is the one with the greatest need (the highest priority). 
+- When you ***offer()*** an object onto a **PriorityQueue**, that object is sorted into the queue. The default sorting uses the natural order of the objects in the queue, but you can modify the order by providing your own **Comparator**.
+- When you call ***peek()***, ***poll()***, or ***remove()***, the element you get will be the one with the highest priority.
 
 ---
 
@@ -458,6 +508,7 @@ public class Borrow{ // has borrowed something
 
 ## Example
 
+<br/>
 ```java
 import java.util.*;
 public class Test {
@@ -476,14 +527,15 @@ public class Test {
 
 ## The TreeSet Class
 
-- TreeSet is a concrete class that implements the SortedSet interface. You can use an iterator to traverse the elements in the sorted order. The elements can be sorted in two ways:
-  + To use the Comparable interface
-  + To specify a comparator for thee elements in the set if the class for the elements do not implement the Comparable interface , or you don't want to use the compareTo method in the class that implements the Comparable interface. This approach is referred to as order by comparator.
+- ***TreeSet*** is a concrete class that implements the ***SortedSet*** interface. You can use an iterator to traverse the elements in the sorted order. The elements can be sorted in two ways:
+  + <font size=6>To use the ***Comparable*** interface</font>
+  + <font size=6>To specify a comparator for thee elements in the set if the class for the elements do not implement the ***Comparable*** interface , or you don't want to use the <font color=red>*compareTo*</font> method in the class that implements the ***Comparable*** interface. This approach is referred to as order by comparator.</font>
 
 ---
 
 ## Example
 
+<br/>
 ```java
 import java.util.*;
 public class TestTreeSet {
@@ -511,10 +563,9 @@ public class TestTreeSet {
 
 - Sometimes you want to insert elements of different types into a tree set. The elements may not be instances of Comparable or are not comparable. You can define a comparator to compare these elements.
 
-- To do so, create a class that implements the java.util.Comparator interface. The Comparator interface has two methods, compare and equals
-
-  + public int compare(Object element1, Object element2)
-  + public boolean equals(Object element)
+- To do so, create a class that implements the <font color=red>*java.util.Comparator*</font> interface. The Comparator interface has two methods, compare and equals
+  + public int compare(T o1, T o2)
+  + public boolean equals(Object obj)
 
 ---
 
@@ -522,7 +573,7 @@ public class TestTreeSet {
 
 ```java
 
-import java.util.Comparator; //P25
+import java.util.Comparator;
 public class GeometricObjectComparator implements Comparator<GeometricObject> {
     public int compare(GeometricObject o1, GeometricObject o2) {
         double area1 = o1.getArea();
@@ -566,18 +617,19 @@ public class TestTreeSetWithComparator {
 
 ## Map
 
+- An object that maps keys to values. A map cannot contain duplicate keys; each key can map to at most one value.
 - Table lookup abstraction
-  + void put( Object key, Object value)
-  + Object get (Object key)
-- can grow as needed any Objects for key and value (keys tested for equality with equals, of course)
+  + void put(K key, V value)
+  + V get(Object key)
 - API syntax independent of implementation (HashMap, LinkedHashMap, TreeMap)
 - Iterators for keys, values, (key, value) pairs
+- static interface: <font color=red>Map.Entry&lt;K, V&gt;</font>
 
 ---
 
 ## The Map Interface UML Diagram
 
-![](http://yp.njuics.cn:7911/Map.jpeg)
+![](http://yp.njuics.cn:7911/Map.jpeg)<!-- .element height="60%" width="80%" -->
 
 ---
 
@@ -592,6 +644,7 @@ public class TestTreeSetWithComparator {
 
 ## Example
 
+<br/>
 ```java
 import java.util.*;
 public class Test {
@@ -615,6 +668,7 @@ public class Test {
 
 ## Example
 
+<br/>
 ```java
 public class CountOccurrenceOfWords { 
     public static void main(String[] args) {
