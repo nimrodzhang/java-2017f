@@ -113,7 +113,7 @@ s = st.pop();
 
 ## Collection Interfaces
 
-- Collections also uses following interfaces:
+- Collections also use following interfaces:
   + Comparator
   + Iterator
   + ListIterator
@@ -195,10 +195,14 @@ while (itr.hasNext()){
 import java.util.*
 public class SimpleCollection{
   public static void main(String[] args){
-    Collection c = new ArrayList();
-    for (i=0;i<10;i++)   c.add(Integer.toString(i));
+    Collection<Integer> c = new ArrayList<Integer>();
+    for (i=0;i<10;i++)   
+       c.add(i); //Autoboxing
+    for(Integer i:c)  
+       System.out.println(i);
     Iterator it = c.iterator();
-    while (it.hasNext())  System.out.println(it.next());
+    while (it.hasNext())  
+       System.out.println(it.next());
   }
 }
 
@@ -250,8 +254,7 @@ public class SimpleCollection{
   + shuffle (List)
   + fill (List, Object)
   + copy (List dest, List src)
-  + min (Collection)
-  + max (Collection)
+  + min / max (Collection)
   + synchronizedX, unmodifiableX factory methods
   + ...
 
@@ -267,18 +270,6 @@ Collections.fill(arrayList, "yellow");
 Collections.shuffle(arrayList);
 ...
 ```
-
----
-
-## Utility Classes -2
-
-- <font color=red>**java.util.Arrays**</font> class
-- Static methods that act on Java arrays:
-  + sort
-  + binarySearch
-  + equals
-  + fill
-  + asList: returns an ArrayList composed of this array's contents
 
 ---
 
@@ -314,7 +305,7 @@ Collections.shuffle(arrayList);
     
 - LinkedList
   + a ***doubly-linked*** list implementation
-  + May provide better performance that ArrayList
+  + May provide better performance than ArrayList
     + if elements frequently inserted/deleted within the List
   + For queues and double-ended queuse (deques)
 
@@ -408,7 +399,7 @@ public class Polygon{ // 存储多边形顶点的Point表
 
 ## The Stack Class
 
-- The ***Stack*** class represents a last-in-first-out stack of objects. The elements are accessed only from the top of the stack. You can retrieve, insert, or remove an element from the top of the stack.
+- The ***Stack*** class represents a "last-in, first-out" stack of objects. The elements are accessed only from the top of the stack. You can retrieve, insert, or remove an element from the top of the stack.
 
 ![](http://yp.njuics.cn:7911/Stack.jpeg)<!-- .element height="70%" width="70%" -->
 
@@ -528,8 +519,8 @@ public class Test {
 ## The TreeSet Class
 
 - ***TreeSet*** is a concrete class that implements the ***SortedSet*** interface. You can use an iterator to traverse the elements in the sorted order. The elements can be sorted in two ways:
-  + <font size=6>To use the ***Comparable*** interface</font>
-  + <font size=6>To specify a comparator for thee elements in the set if the class for the elements do not implement the ***Comparable*** interface , or you don't want to use the <font color=red>*compareTo*</font> method in the class that implements the ***Comparable*** interface. This approach is referred to as order by comparator.</font>
+  + <font size=6>To use the <font color=red>***java.lang.Comparable***</font> interface</font>
+  + <font size=6>To specify a comparator for the elements in the set if the class for the elements do not implement the ***Comparable*** interface , or you don't want to use the *compareTo* method in the class that implements the ***Comparable*** interface. This approach is referred to as <font color=yellow>order by comparator</font>.
 
 ---
 
@@ -563,7 +554,7 @@ public class TestTreeSet {
 
 - Sometimes you want to insert elements of different types into a tree set. The elements may not be instances of Comparable or are not comparable. You can define a comparator to compare these elements.
 
-- To do so, create a class that implements the <font color=red>*java.util.Comparator*</font> interface. The Comparator interface has two methods, compare and equals
+- To do so, create a class that implements the <font color=red>*java.util.Comparator*</font> interface. The Comparator interface has two methods, compare and equals:
   + public int compare(T o1, T o2)
   + public boolean equals(Object obj)
 
@@ -696,9 +687,70 @@ public class CountOccurrenceOfWords {
 
 ---
 
+## More about Arrays
+
+- Arrays are first-class objects
+- Differences from other types of containers:
+  + efficiency
+  + type
+  + the ability to hold primitives
+- Be careful of IndexOutOfBoundsException!
+
+---
+
+## Arrays and Generics
+
+- Arrays and generics do not mix well.
+
+```java
+Peel<Banana>[] peels = new Peel<Banana> [10]; //Illegal
+```
+
+```java
+Peel[] peels = new Peel[10]; //enforce type safety
+List<String>[] ls;
+List[] la = new List[10];
+ls = (List<String>[])la;  //"Unchecked" warning
+ls[0] = new ArrayList<String>();
+ls[1] = new ArrayList<Integer>(); //compile-time checking produces an error
+
+```
+
+---
+
+## Utility Classes -2
+
+- <font color=red>**java.util.Arrays**</font> class
+- Static methods that act on Java arrays:
+  + sort
+  + binarySearch
+  + equals / deepEquals
+  + fill
+  + copyOf
+  + asList: returns an ArrayList composed of this array's contents
+
+---
+
+## Summary
+
+- Array is fixed-sized and low-level. "Prefer containers to arrays."
+- A **Collection** holds single elements, and a **Map** holds associated pairs.
+- Arrays and **List**s are ordered containers.
+- No need to use legacy classes: **Vector**, **Hashtable**, and **Stack** in new code.
+
+---
+
 ## Summary
 
 ![](http://yp.njuics.cn:7911/Summary.jpeg)
+
+---
+
+## Summary
+
+- Use an **ArrayList** if you are doing a lot of random accesses, but a **LinkedList** if you will be doing a lot of insertions and removals.
+- **HashMap**s are designed for rapid access. **TreeMap** keeps its keys in sorted order. **LinkedList** keeps its elements in insertion order and provides rapid access with hashing.
+- **Set** only accepts one of each type of objects. **HashSet** provides maximally fast lookups, whereas **TreeSet** keeps the elements in sorted order. **LinkedHashSet** keeps elements in insertion order.
 
 ---
 
