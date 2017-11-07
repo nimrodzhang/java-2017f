@@ -196,11 +196,11 @@ import java.util.*
 public class SimpleCollection{
   public static void main(String[] args){
     Collection<Integer> c = new ArrayList<Integer>();
-    for (i=0;i<10;i++)   
+    for (int i=0;i<10;i++)   
        c.add(i); //Autoboxing
     for(Integer i:c)  
        System.out.println(i);
-    Iterator it = c.iterator();
+    Iterator<Integer> it = c.iterator();
     while (it.hasNext())  
        System.out.println(it.next());
   }
@@ -442,7 +442,7 @@ public class Borrow{ // has borrowed something
 
 ```java
 public class QueueDemo{
-  public static void printQ(Queue queue){
+  public static void printQ(Queue<?> queue){
     while (queue.peek()!=null) 
        System.out.print(queue.remove()+"  ");
     System.out.println();
@@ -502,7 +502,7 @@ public class QueueDemo{
 <br/>
 ```java
 import java.util.*;
-public class Test {
+public class SetTest {
     public static void main(String[] args) {
         Set<String> ss = new LinkedHashSet<String>();
         for (int i = 0; i < args.length; i++)
@@ -538,11 +538,11 @@ public class TestTreeSet {
         set.add("San Francisco");
         set.add("Beijing");
         set.add("New York");
-        TreeSet<String> treeSet = new TreeSet<String>(set);
-        System.out.println(treeSet);
-        // Display the elements in the hash set
         for (Object element: set)
-        System.out.print(element.toString() + " "); 
+          System.out.print(element.toString() + " "); 
+        System.out.println();
+        TreeSet<String> treeSet = new TreeSet<String>(set);
+        System.out.println(treeSet);        
     }
 }
 
@@ -638,7 +638,7 @@ public class TestTreeSetWithComparator {
 <br/>
 ```java
 import java.util.*;
-public class Test {
+public class HasMapTest {
   public static void main(String[] args) {
     //map to hold student grades
     Map<String, Integer> theMap = new HashMap<String, Integer>();
@@ -668,6 +668,7 @@ public class CountOccurrenceOfWords {
       // Create a hash map to hold words as key and count as value
       TreeMap<String, Integer> map = new TreeMap<String, Integer>();
       String[] words = text.split("[ .!?]");
+      System.out.println(Arrays.toString(words));
       for (int i = 0; i < words.length; i++) {
       if (words[i].length() > 1) {
       if (map.get(words[i]) != null) {
