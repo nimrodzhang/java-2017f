@@ -127,7 +127,7 @@ public class Position<T extends Creature>{
 
 ---
 
-## 定义一个Computer 
+## 再定义一个Computer 
 
 ``` java
 public class Computer{
@@ -238,7 +238,174 @@ public class Computer<T extends Disk>{
 
 ## 泛型方法
 
+``` java
+public class GenericMethods {
+    public <T> void f(T x) {
+        System.out.println(x.getClass().getName());
+    }
+    public static void main(String[] args) {
+        GenericMethods gm = new GenericMethods();
+        gm.f("");
+        gm.f(1); //autoboxing
+        gm.f(1.0);
+        gm.f(1.0F);
+        gm.f(‘c’);
+        gm.f(gm);
+    }
+}
+```
 
+---
+
+## 再看容器
+
+``` java
+public class Holder<T> {
+    private T obj;
+    public void set(T obj){
+        this.obj = obj;
+    }
+    public T get(){
+        return obj;
+    }
+    public static void main(String[] args){
+        Holder<Integer> holder = new Holder<>();
+        holder.set(1);
+        //holder.set("Abc"); // error
+        Integer obj = holder.get(); //无须cast
+    }       
+}
+```
+多完美！ <!-- .element: class="fragment" -->
+可惜这只是编译时刻... 因为运行时的类型信息被擦掉了<!-- .element: class="fragment" -->
+
+---
+
+## 擦除
+
+``` java
+public class Computer<T extends Disk>{
+    private T disk;   // 运行时disk是Disk类型
+    Computer(T disk){
+        disk = disk;
+    }
+}
+```
+
+<small>Java泛型的实现方式就是将类型参数用边界类型替换，在上面的例子中就是把T用Disk替换。这种实现方式看上去就像是把具体的类型（某种硬盘，机械的或者是固态的），擦除到了边界类型（它们的父类Disk)。</small>
+
+---
+
+## 擦除
+
+``` java
+ppublic class Holder<T> {
+    private T obj;
+    public void set(T obj){
+        this.obj = obj;
+    }
+    public T get(){
+        return obj;
+    }
+    public void testT(Object arg){
+        if (arg instanceof T){ ... } //编译错误
+        T var = new T(); //编译错误
+        T[] array = new T[100]; //编译错误
+        }
+    }
+```
+
+这劳什子有何用？！<!-- .element: class="fragment" -->
+
+---
+
+## T存在的意义
+```java
+public class Holder<T> {
+    private T obj; //在编译时，该类中的所有的T都会被替换为边界类型Object。
+    public void set(T obj){
+        this.obj = obj;
+    }
+    public T get(){
+        return obj;
+    }
+    public static void main(String[] args){
+        Holder<Integer> holder = new Holder<>();
+        //编译器会检查实参是不是一个Integer，
+        //虽然这里的1是int类型，但是因为自动包装机制的存在，
+        //他会被转化为一个Integer，因此能够通过类型检查。
+        holder.set(1); 
+        //编译器也会进行类型检查，
+        //并且自动插入一个Object类型到Integer类型的转型操作。
+        Integer obj = holder.get();
+    }       
+}
+```
+
+---
+
+## 范型的实际实现
+
+- 对泛型的处理全部集中在编译期，在编译时，编译器会执行如下操作。
+  - 会将泛型类的类型参数都用边界类型替换。
+  - 对于传入对象给方法形参的指令，编译器会执行一个类型检查，看传入的对象是不是类型参数所指定的类型。
+  - 对于返回类型参数表示对象的指令，也会执行一个类型检查，还会插入一个自动的向下转型，将对象从边界类型向下转型到类型参数所表示的类型。
+
+
+---
+
+## 如果真想生成范型对象？
+
+```java
+class Holder<T>{
+    private T t;
+    public void init(IFactory<T> factory){
+        this.t = factory.create();  // 此处即为new T()的工厂方法的实现
+    }
+}
+
+interface IFactory<T>{  //接口也可以参数化
+    T create();
+}
+
+class IntegerFactory implements IFactory<Integer>{
+    public Integer create(){
+        return new Integer(10);
+    }
+}
+
+public class newTwithFactory{
+    public static void main(String[] args){
+        Holder<Integer> holder = new Holder<>();
+        holder.init(new IntegerFactory());
+    }
+}
+```
+
+---
+
+## 或者可以使用RTTI
+
+``` java
+class Holder<T>{
+    private T t;
+    private Class<T> kind;
+    public Holder(Class<T> kind){
+        this.kind = kind;
+    }
+    public void init(){
+        try{
+            this.t = kind.newInstance();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public static void main(String[] args) {
+        Holder<Integer> holder = new Holder<>(Integer.class);
+        holder.init();
+    }
+}
+```
 
 ---
 
