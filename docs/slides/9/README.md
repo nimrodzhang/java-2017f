@@ -35,7 +35,7 @@ s = (String)st.pop();
 ## With Generics
 
 ```java
-class Stack<A>{
+class Stack<A>{ // 类参数
   void push(A a){...}
   A pop(){...}
 }
@@ -47,11 +47,82 @@ s = st.pop();
 
 ```
 
+
 ---
 
 ## 泛型是什么
 
 泛型：参数化类型。
+
+---
+
+## 葫芦娃中的例子
+
+``` java
+public class Position {
+    private Object holder;
+    public Position(Object holder) { 
+        this.a = a; 
+    }
+    Object get() { 
+        return a; 
+    }
+}
+```
+
+Postion里放任意东西<!-- .element: class="fragment" -->
+
+---
+
+## 改进
+
+``` java
+public class Position {
+    private Creature holder;
+    public Position(Creature holder) { 
+        this.a = a; 
+    }
+    Creature get() { 
+        return a; 
+    }
+}
+```
+
+通过构造方法和get方法我们能看出Position里放的是Creature<!-- .element: class="fragment" -->
+
+---
+
+## 但如果是这样呢？
+``` java
+public class Position {
+    private Creature holder;
+}
+```
+
+从外部观察，何以了解Position是放Creature的？<!-- .element: class="fragment" -->
+
+---
+
+## 显式说明一下
+
+``` java
+public class Position<T>{
+    private T holder;
+}
+```
+显式表达“某种不确定”: Position里是要放东西的，但不确定是什么东西 <!-- .element: class="fragment" -->
+
+---
+
+## 再明白一点
+
+``` java
+public class Position<T extends Creature>{
+    private T holder;
+}
+```
+
+显式表达Position是跟某种Creature有关系的 <!-- .element: class="fragment" -->
 
 
 ---
@@ -132,9 +203,44 @@ public class SSDComputer{
 
 基于多态实现设计抽象（解耦） <!-- .element: class="fragment" -->
 
+---
+
+## 用范型来做
+
+``` java
+public class Computer<T extends Disk>{
+    private T disk;   // 参数类
+    Computer(T disk){
+        disk = disk;
+    }
+    public Data readDisk(){
+        return disk.read();
+    }
+    public void writeDisk(Data data){
+        disk.write(data);
+    }
+    public T getDisk(){
+        return disk;
+    }
+    public void setDisk(T disk){
+        return this.disk = disk;
+    }
+
+    public static void main(String[] args) {
+        Computer<SSD> computer = new Computer<SSD>(new SSD());
+        SSD disk = computer.getDisk(); // No cast needed
+        //computer.setDisk(new HHD()); // error!
+    }
+}
+```
 
 ---
 
+## 泛型方法
+
+
+
+---
 
 ## Rewrite 葫芦娃 with Generics
 
