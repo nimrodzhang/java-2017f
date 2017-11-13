@@ -296,7 +296,7 @@ public class Computer<T extends Disk>{
 
 ---
 
-## 擦除
+## 擦除的后果
 
 ``` java
 ppublic class Holder<T> {
@@ -313,6 +313,7 @@ ppublic class Holder<T> {
         T[] array = new T[100]; //编译错误
         }
     }
+}
 ```
 
 这劳什子有何用？！<!-- .element: class="fragment" -->
@@ -406,6 +407,9 @@ class Holder<T>{
     }
 }
 ```
+
+---
+
 
 ---
 
