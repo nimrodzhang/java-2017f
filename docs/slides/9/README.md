@@ -411,6 +411,18 @@ class Holder<T>{
 ---
 
 
+## 这是同一个类型么？
+
+```java
+ArrayList<Integer> intList = new ArrayList<>();
+ArrayList rawList = new ArrayList();
+
+System.out.println(intList.getClass().getSimpleName());
+System.out.println(rawList.getClass().getSimpleName());
+
+
+```
+
 ---
 
 ## Rewrite 葫芦娃 with Generics
