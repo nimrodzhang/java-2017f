@@ -626,8 +626,106 @@ class SelfBounded<T extends SelfBounded<T>>{
 😢😢😢😢😢😢😢😢😢😢😢😢😢😢😢😢😢😢😢😢😢😢
 
 PP701～ <!-- .element: class="fragment" -->
+
 ---
 
+## 从简单的开始
+
+```java
+public class BasicHolder<T> {
+    T element;
+    void set(T arg){this.element = arg;}
+    T get(){return this.element;}
+    void print(){
+        System.out.println(element.getClass().getSimpleName());
+    }
+}
+
+public class SubType extends BasicHolder<SubType> {
+    public static void main(String[] args){
+        SubType s1 = new SubType();
+        SubType s3 = s1.get();
+        s1.print();
+        s3.print();
+    }
+}
+
+```
+
+---
+
+## 得到什么？
+
+``` java
+public class SubType extends BasicHolder<SubType> {}
+public class Plate extends BasicHolder<Plate>{}
+...
+```
+
+P703: ... the generic base class becomes a kind of templte for comon functionality for all its derived class <!-- .element: class="fragment" -->
+
+跟实现一个父类有什么区别？<!-- .element: class="fragment" -->
+
+---
+
+## 跟普通继承关系的区别
+
+... but this functionality will use the derived type for all of its arguments and return values ...
+
+干得漂亮！<!-- .element: class="fragment" -->
+
+---
+
+## 还有一点小问题
+
+``` java
+class Other{}
+class BasicOther extends BasicHolder<Other>{}
+
+public static void main(String[] args){
+    BasicOther b = new BasicOther(), b2 = new BasicOther();
+    b.set(new Other());
+    Other other = b.get();
+    b.print();// Other
+}
+```
+
+没完全限制<!-- .element: class="fragment" -->
+
+---
+
+## Self-bounded
+
+```java
+class SelfBounded<T extends SelfBounded<T>> {
+    T element;
+    SelfBounded<T> set(T arg){
+        element = arg;
+        return this;
+    }
+    T get(){return element;}
+}
+
+class A extends SelfBounded<A> {}
+class B extends SelfBounded<A> {} //ok 
+class D;
+class E extends SelfBounded<D>{} //error
+
+public static void main(String[] args){
+        A a = new A();
+        a.set(new A());
+        a.print();
+
+        B b = new B(), a2 = new B();
+        //b.set(b2); //Error
+        //b.print();
+    }
+
+```
+
+... forcing the generic to be used as its own bound argument
+
+---
 
 ## Rewrite 葫芦娃 with Generics
 
