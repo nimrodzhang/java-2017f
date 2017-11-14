@@ -296,6 +296,20 @@ public class Computer<T extends Disk>{
 
 ---
 
+
+## 这两个是不同类型么？
+
+```java
+ArrayList<Integer> intList = new ArrayList<>();
+ArrayList rawList = new ArrayList();
+
+System.out.println(intList.getClass().getSimpleName());
+System.out.println(rawList.getClass().getSimpleName());
+```
+
+
+---
+
 ## 擦除的后果
 
 ``` java
@@ -408,22 +422,212 @@ class Holder<T>{
 }
 ```
 
+
 ---
 
+## 边界 Bounds
 
-## 这是同一个类型么？
+用`extends`申明对参数类型的限制条件
 
 ```java
-ArrayList<Integer> intList = new ArrayList<>();
-ArrayList rawList = new ArrayList();
+interface HasColor{java.awt.Color getColor();}
 
-System.out.println(intList.getClass().getSimpleName());
-System.out.println(rawList.getClass().getSimpleName());
+class Colored <T extends HasColor>{...}
+
+class Dimension {public int x,y,z;}
+
+class ColoredDimension <T extends  Has Color & Dimension>{...} //错误！
+class ColoredDimension <T extends Dimension & Has Color>{
+    
+}
+```
 
 
+---
+
+## 看看这个例子
+
+``` java
+
+class Fruit{}
+class Apple extends Fruit{}
+
+public class NonConvariantGeneric {
+    List<Fruit> flist = new ArrayList<Apple>(); //编译错误
+}
 ```
 
 ---
+
+## 再看看这个例子
+
+
+
+```java
+class Fruit {}
+class Apple extends Fruit {}
+
+class Plate<T>{
+    private T item;
+    public Plate(T t){item=t;}
+    public void set(T t){item=t;}
+    public T get(){return item;}
+}
+
+//现在我定义一个“水果盘子”，逻辑上水果盘子当然可以装苹果。
+//但实际上Java编译器不允许这个操作。会报错，“装苹果的盘子”无法转换成“装水果的盘子”。
+Plate<Fruit> p=new Plate<Apple>(new Apple()); //编译错误！
+```
+
+“苹果” IS-A “水果”， BUT “装苹果的盘子” NOT-IS-A “装水果的盘子”！<!-- .element: class="fragment" -->
+
+Contravariance <!-- .element: class="fragment" -->
+
+---
+
+## Contravariance
+
+<small>https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)</small>
+
+
+---
+
+## 通配符
+
+```java
+class Fruit{}
+class Apple extends Fruit{}
+public class GenericsAndCovariance {
+    public static void main(String[] args){
+        //一个能放水果以及一切是水果派生类的盘子,啥水果都能放的盘子
+        //Plate<？ extends Fruit>和Plate<Apple>最大的区别就是：
+        //Plate<？ extends Fruit>是Plate<Fruit>以及Plate<Apple>的基类。
+        Plate<? extends Fruit> p=new Plate<Apple>(new Apple());
+        // a list of any type that's inherited from Fruit
+        List<? extends Fruit> flist = new ArrayList<Apple>();
+    }
+}
+```
+
+---
+
+## 扩展一下
+
+```java
+class Food{}
+//Lev 2
+class Fruit extends Food{}
+class Meat extends Food{}
+//Lev 3
+class Apple extends Fruit{}
+class Banana extends Fruit{}
+class Pork extends Meat{}
+class Beef extends Meat{}
+//Lev 4
+class RedApple extends Apple{}
+class GreenApple extends Apple{}
+```
+
+---
+
+## 通配
+``` java
+Plate<？ extends Fruit>
+```
+
+![](https://itimetraveler.github.io/gallery/java-genericity/lowerBounds.png)
+
+---
+
+## but
+
+```java
+class Fruit{}
+class Apple extends Fruit{}
+public class GenericsAndCovariance {
+    public static void main(String[] args){
+       Plate<? extends Fruit> p=new Plate<Apple>(new Apple());
+	
+        //不能存入任何元素
+        p.set(new Fruit());    //Error
+        p.set(new Apple());    //Error
+        //读取出来的东西只能存放在Fruit或它的基类里。
+        Fruit newFruit1=p.get();
+        Object newFruit2=p.get();
+        Apple newFruit3=p.get();    //Error
+    }
+}
+```
+"A Plate of any type that's inherited from Fruit"的意思不是"a Plate will hold any type of Fruit" <!-- .element: class="fragment" -->
+but means "some specific type which is not specify" <!-- .element: class="fragment" -->
+
+---
+
+## superß
+
+``` java
+//表达的就是相反的概念：一个能放水果以及一切是水果基类的盘子。
+//Plate<？ super Fruit>是Plate<Fruit>的基类，但不是Plate<Apple>的基类。
+Plate<？ super Fruit>
+```
+
+![](https://itimetraveler.github.io/gallery/java-genericity/upperBounds.png)
+
+`Plate<？super Fruit>`覆盖图中红色的区域。
+
+---
+
+## but
+
+```java
+class Fruit{}
+class Apple extends Fruit{}
+public class GenericsAndCovariance {
+    public static void main(String[] args){
+       Plate<? super Fruit> p=new Plate<Fruit>(new Fruit());
+        //存入元素正常
+        p.set(new Fruit());
+        p.set(new Apple());
+        //读取出来的东西只能存放在Object类里。
+        Apple newFruit3=p.get();    //Error
+        Fruit newFruit1=p.get();    //Error
+        Object newFruit2=p.get();
+    }
+}
+```
+
+
+---
+
+## 无界通配符 Unbounded Wildcards
+
+`List<?>` vs. `List` vs. `List<Object>` ?
+
+---
+
+## Overloading
+
+```java
+public class UseList<W,T>{
+    void f(List<T> v){}
+    void f(List<W> v){}
+}
+```
+
+---
+
+## Self-bounded types
+
+```java
+class SelfBounded<T extends SelfBounded<T>>{
+    ...
+}
+```
+😢😢😢😢😢😢😢😢😢😢😢😢😢😢😢😢😢😢😢😢😢😢
+
+PP701～ <!-- .element: class="fragment" -->
+---
+
 
 ## Rewrite 葫芦娃 with Generics
 
