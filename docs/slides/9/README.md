@@ -727,9 +727,18 @@ public static void main(String[] args){
 
 ---
 
+## 高大上一点的说法
+
+Argument covariance
+
+&
+
+Covariant return types
+
+---
+
 ## Rewrite 葫芦娃 with Generics
 
-
 
 ---
 
