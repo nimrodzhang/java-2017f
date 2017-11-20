@@ -26,6 +26,12 @@ Mike Cohn
 
 ![](https://res.infoq.com/news/2017/10/micro-service-build-test-culture/zh/resources/492-1509263405982.png)
 
+在软件开发中是一个很重要的方面，良好的测试可以在很大程度决定一个应用的命运。
+
+---
+
+## 测试 
+
 
 ---
 
