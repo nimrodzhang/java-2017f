@@ -34,6 +34,7 @@ public class Queue {
     }
 
 
+    @Deprecated
     public void rollCall() {
         for (Creature creature : this.creatures) {
             creature.report();
@@ -60,6 +61,7 @@ public class Queue {
         }
     }
 
+    @SuppressWarnings(value="all")
     public static void main(String[] args) {
 
         Huluwa[] brothers = new Huluwa[7];
@@ -69,6 +71,7 @@ public class Queue {
         }
 
         Queue queue = new Queue(brothers);
+
 
         queue.rollCall();
 
