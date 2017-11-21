@@ -30,7 +30,7 @@
   - 如果某个方法带有该注解但并没有覆写父类相应的方法，则编译器会生成一条错误信息
   - `@Override`可适用元素为方法
 
-试一下
+试一下 <!-- .element: class="fragment" -->
 
 
 ---
@@ -63,7 +63,7 @@
 | ... | ... | 
 | all     | 以上所有情况| 
 
-`javac -X`
+`javac -X` <!-- .element: class="fragment" -->
 
 ---
 
