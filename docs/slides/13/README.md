@@ -38,6 +38,215 @@
 
 ---
 
+## 基础
+
+- `Runnable`
+- `Thread`
+- `Callable`
+
+---
+
+## Runnable
+
+
+``` java
+public interface Runnable {
+    public abstract void run();
+}
+
+public class LiftOff implements Runnable {
+    protected int countDown = 10; // Default
+    private static int taskCount = 0;
+    private final int id = taskCount++;
+
+    public LiftOff() {
+    }
+
+    public LiftOff(int countDown) {
+        this.countDown = countDown;
+    }
+
+    public String status() {
+        return "#" + id + "(" +
+                (countDown > 0 ? countDown : "Liftoff!") + "), ";
+    }
+
+    public void run() {
+        while (countDown-- > 0) {
+            System.out.print(status());
+            Thread.yield();
+        }
+    }
+}
+
+public class MainThread {
+    public static void main(String[] args) {
+        LiftOff launch = new LiftOff();
+        launch.run();
+    }
+}
+```
+
+<small>`Runnable`接口仅仅定义“任务”</small>
+
+---
+
+
+## Thread
+
+``` java
+public class BasicThreads {
+    public static void main(String[] args) {
+        //把任务装进线程里
+        Thread t = new Thread(new LiftOff());
+        t.start();
+        System.out.println("Waiting for LiftOff");
+    }
+}
+```
+
+<small>`Thread`对象像是运载火箭，`Runnable`的实现对象就是一个荷载（payload）</small>
+
+
+---
+
+## 多线程，走起
+
+```java
+public class MoreBasicThreads {
+    public static void main(String[] args) {
+        for (int i = 0; i < 5; i++)
+            new Thread(new LiftOff()).start();
+        System.out.println("Waiting for LiftOff");
+    }
+}
+```
+
+直接启动多个`Thread`
+
+---
+
+## 或者用ExecutorService启动
+
+``` java
+public class CachedThreadPool {
+    public static void main(String[] args) {
+        ExecutorService exec = Executors.newCachedThreadPool();
+        for (int i = 0; i < 5; i++)
+            exec.execute(new LiftOff());
+        exec.shutdown();
+    }
+}
+```
+<small>`CachedThreadPool`：根据需要创建新线程的线程池，如果现有线程没有可用的，则创建一个新线程并添加到池中，如果有被使用完但是还没销毁的线程，就复用该线程</small>
+
+---
+
+## 线程池？
+
+- 在面向对象编程中，创建和销毁对象是很费时间的，因为创建一个对象要获取内存资源或者其它更多资源。
+- 在Java中更是如此，虚拟机将试图跟踪每一个对象，以便能够在对象销毁后进行垃圾回收。
+- 所以提高服务程序效率的一个手段就是尽可能减少创建和销毁对象的次数，特别是一些很耗资源的对象创建和销毁。
+- 如何利用已有对象来服务就是一个需要解决的关键问题，其实这就是一些"池化资源"技术产生的原因。
+
+---
+
+## 或者另一种策略
+
+``` java
+public class FixedThreadPool {
+    public static void main(String[] args) {
+        // Constructor argument is number of threads:
+        ExecutorService exec = Executors.newFixedThreadPool(5);
+        for (int i = 0; i < 5; i++)
+            exec.execute(new LiftOff());
+        exec.shutdown();
+    }
+}
+```
+<small>创建一个固定线程数的线程池，在任何时候最多只有n个线程被创建。如果在所有线程都处于活动状态时，有其他任务提交，他们将等待队列中直到线程可用。如果任何线程由于执行过程中的故障而终止，将会有一个新线程将取代这个线程执行后续任务。</small>
+
+<small>如果需要获得异步执行的任务的结果怎么办？</small><!-- .element: class="fragment" -->
+
+
+
+---
+
+## Callable
+
+``` java
+
+public interface Callable<V> {
+    V call() throws Exception;
+}
+
+class TaskWithResult implements Callable<String> {
+    private int id;
+
+    public TaskWithResult(int id) {
+        this.id = id;
+    }
+
+    public String call() {
+        return "result of TaskWithResult " + id;
+    }
+}
+
+public class CallableDemo {
+    public static void main(String[] args) {
+        ExecutorService exec = Executors.newCachedThreadPool();
+        ArrayList<Future<String>> results =
+                new ArrayList<Future<String>>();
+        for (int i = 0; i < 10; i++)
+            results.add(exec.submit(new TaskWithResult(i)));
+        for (Future<String> fs : results)
+            try {
+                // get() blocks until completion:
+                System.out.println(fs.get());
+            } catch (InterruptedException e) {
+                System.out.println(e);
+                return;
+            } catch (ExecutionException e) {
+                System.out.println(e);
+            } finally {
+                exec.shutdown();
+            }
+    }
+}
+```
+
+
+---
+
+## Future
+
+``` java
+class MyCallable implements Callable<String>{
+    @Override
+    public String call() throws Exception {
+        System.out.println("做一些耗时的任务...");
+        Thread.sleep(5000);
+        return "OK";
+    }
+}
+
+public class FutureSimpleDemo {
+    public static void main(String[] args) throws InterruptedException, ExecutionException {
+
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        Future<String> future = executorService.submit(new MyCallable());
+
+        System.out.println("dosomething...");
+
+        System.out.println("得到异步任务返回结果：" + future.get());
+        System.out.println("Completed!");
+    }
+}
+```
+
+<small>当调用`Future`的`get()`方法以获得结果时，当前线程就开始阻塞，直接`call()`方法结束返回结果。</small>
+
+---
 
 让你的葫芦娃们动起来！
 
