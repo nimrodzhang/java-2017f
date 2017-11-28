@@ -20,16 +20,16 @@
 ## 进程 vs. 线程
 
 - 进程：是系统进行资源分配和调度的一个独立单位，也是一个具有独立功能的程序；
-- 线程：线程是进程的一个实体,是CPU调度和分派的基本单位,它是比进程更小的能独立运行的基本单位.线程自己基本上不拥有系统资源,只拥有一点在运行中必不可少的资源(如程序计数器,一组寄存器和栈),但是它可与同属一个进程的其他的线程共享进程所拥有的全部资源。
+- 线程：线程依托于进程而存在,是CPU调度和分派的基本单位,它是比进程更小的能独立运行的基本单位。线程自己基本上不拥有系统资源,只拥有一点在运行中必不可少的资源(如程序计数器,一组寄存器和栈),但是它可与同属一个进程的其他的线程共享进程所拥有的全部资源。
 
+<small>区别在于，进程属于资源分配的单位，而线程则是作业调度的单位；进程拥有自己的地址空间，而多个线程拥有自己的堆栈和局部变量，并共享所依托于进程的资源。</small>
 
 ---
 
 ## 多线程的意义
 
-线程是依托于进程而存在的，至于线程与进程的区别在于，进程属于资源分配的单位，而线程则是作业调度的单位；进程拥有自己的地址空间，而多个线程拥有自己的堆栈和局部变量，并共享所依托于进程的资源。多进程操作的意义在于多个进程轮流共享CPU的时间片(针对单处理器情形，多处理器可理解为并行)，属于并发操作。多线程的并发操作优势在于当程序遇到阻塞的情形。
-
-当程序的某个任务因外部条件问题，导致阻塞，如果没有并发，则整个程序停止，直到外部条件发生变化，使用并发后，程序中的其他任务还可以继续执行，如果没有阻塞，在单处理器上考虑多线程并发也就没有意义了，线程之间的切换会造成大量的时间消耗。
+- 多进程操作的意义在于多个进程轮流共享CPU的时间片(针对单处理器情形，多处理器可理解为并行)，属于并发操作。
+- 多线程的并发操作优势在于当程序遇到阻塞的情形。当程序的某个任务因外部条件问题，导致阻塞，如果没有并发，则整个程序停止，直到外部条件发生变化，使用并发后，程序中的其他任务还可以继续执行，如果没有阻塞，在单处理器上考虑多线程并发也就没有意义了，线程之间的切换会造成大量的时间消耗。
 
 
 ---
@@ -53,6 +53,8 @@
 
 ## Runnable
 
+
+java.lang.Runnable
 
 ``` java
 public interface Runnable {
@@ -99,6 +101,8 @@ public class MainThread {
 
 ## Thread
 
+java.lang.Thread
+
 ``` java
 public class BasicThreads {
     public static void main(String[] args) {
@@ -115,6 +119,7 @@ public class BasicThreads {
 ---
 
 ## 或者
+
 ``` java
 public class SimpleThread extends Thread {
     private int countDown = 5;
@@ -144,6 +149,10 @@ public class SimpleThread extends Thread {
     }
 }
 ```
+
+<small>实际上</small>
+
+<small>`public class Thread implements Runnable`</small>
 
 ---
 
@@ -848,7 +857,134 @@ public class ThreadLocalVariableHolder {
 
 ---
 
-## Cooperation between tasks
+## 从竞争到协作
+
+```java
+wait();
+notify();
+notifyAll();
+```
+
+`Object`类型上的三个方法
+
+---
+
+## 还是看个例子
+
+```java
+class Car {
+    private boolean waxOn = false;
+
+    public synchronized void waxed() {
+        waxOn = true; // Ready to buff
+        notifyAll();
+    }
+
+    public synchronized void buffed() {
+        waxOn = false; // Ready for another coat of wax
+        notifyAll();
+    }
+
+    public synchronized void waitForWaxing()
+            throws InterruptedException {
+        while (waxOn == false)
+            wait();
+    }
+
+    public synchronized void waitForBuffing()
+            throws InterruptedException {
+        while (waxOn == true)
+            wait();
+    }
+}
+
+class WaxOn implements Runnable {
+    private Car car;
+
+    public WaxOn(Car c) {
+        car = c;
+    }
+
+    public void run() {
+        try {
+            while (!Thread.interrupted()) {
+                printnb("Wax On! ");
+                TimeUnit.MILLISECONDS.sleep(200);
+                car.waxed();
+                car.waitForBuffing();
+            }
+        } catch (InterruptedException e) {
+            print("Exiting via interrupt");
+        }
+        print("Ending Wax On task");
+    }
+}
+
+class WaxOff implements Runnable {
+    private Car car;
+
+    public WaxOff(Car c) {
+        car = c;
+    }
+
+    public void run() {
+        try {
+            while (!Thread.interrupted()) {
+                car.waitForWaxing();
+                printnb("Wax Off! ");
+                TimeUnit.MILLISECONDS.sleep(200);
+                car.buffed();
+            }
+        } catch (InterruptedException e) {
+            print("Exiting via interrupt");
+        }
+        print("Ending Wax Off task");
+    }
+}
+
+public class WaxOMatic {
+    public static void main(String[] args) throws Exception {
+        Car car = new Car();
+        ExecutorService exec = Executors.newCachedThreadPool();
+        exec.execute(new WaxOff(car));
+        exec.execute(new WaxOn(car));
+        TimeUnit.SECONDS.sleep(5); // Run for a while...
+        exec.shutdownNow(); // Interrupt all tasks
+    }
+}
+```
+
+---
+
+## 线程状态
+
+![](https://www.w3resource.com/w3r_images/java-threadclass-methods-and-threadstates-jimage1.png)
+
+---
+
+## wait和sleep的区别
+
+- 调用wait方法时，线程在等待的时候会释放掉它所获得的monitor，但是调用Thread.sleep()方法时，线程在等待的时候仍然会持有monitor或者锁，wait方法应在同步代码块中调用，但是sleep方法不需要
+- Thread.sleep()方法是一个静态方法，作用在当前线程上；但是wait方法是一个实例方法，并且只能在其他线程调用本实例的notify()方法时被唤醒
+
+如果需要暂停线程一段特定的时间就使用sleep()方法，如果要实现线程间通信就使用wait()方法。
+
+---
+
+
+## 高级篇
+
+---
+
+## 高级设施
+
+- `CountDownLatch`
+- `CyclicBarrier`
+- `DelayQueue`
+- `PriorityBlockingQueue`
+- `ScheduledExector`
+- `Semaphore`
+- `Exchanger`
 
 
 
