@@ -1,10 +1,19 @@
 
 ## 并发编程
 
+<small>--这可能是Slides最长的一章。</small>
+
+
+---
+
 "空间是并存事物的次序，或是同时发生的所有事物存在的次序"
 
 --Leibniz <!-- .element align="right" -->
 
+
+---
+
+## 概念篇
 
 ---
 
@@ -38,11 +47,7 @@
 
 ---
 
-## 基础
-
-- `Runnable`
-- `Thread`
-- `Callable`
+## 基础篇
 
 ---
 
@@ -74,7 +79,7 @@ public class LiftOff implements Runnable {
     public void run() {
         while (countDown-- > 0) {
             System.out.print(status());
-            Thread.yield();
+            Thread.yield(); //后面解释
         }
     }
 }
@@ -107,6 +112,38 @@ public class BasicThreads {
 
 <small>`Thread`对象像是运载火箭，`Runnable`的实现对象就是一个荷载（payload）</small>
 
+---
+
+## 或者
+``` java
+public class SimpleThread extends Thread {
+    private int countDown = 5;
+    private static int threadCount = 0;
+
+    public SimpleThread() {
+        // Store the thread name:
+        super(Integer.toString(++threadCount));
+        start();
+    }
+
+    public String toString() {
+        return "#" + getName() + "(" + countDown + "), ";
+    }
+
+    public void run() {
+        while (true) {
+            System.out.print(this);
+            if (--countDown == 0)
+                return;
+        }
+    }
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 5; i++)
+            new SimpleThread();
+    }
+}
+```
 
 ---
 
@@ -248,7 +285,576 @@ public class FutureSimpleDemo {
 
 ---
 
-让你的葫芦娃们动起来！
+## SLEEP
+
+``` java
+public class SleepingTask extends LiftOff {
+    public void run() {
+        try {
+            while (countDown-- > 0) {
+                System.out.print(status());
+                // Old-style:
+                // Thread.sleep(100);
+                // Java SE5/6-style:
+                TimeUnit.MILLISECONDS.sleep(100);
+            }
+        } catch (InterruptedException e) {
+            //可能被打断
+            System.err.println("Interrupted");
+        }
+    }
+
+    public static void main(String[] args) {
+        ExecutorService exec = Executors.newCachedThreadPool();
+        for (int i = 0; i < 5; i++)
+            exec.execute(new SleepingTask());
+        exec.shutdown();
+    }
+}
+```
+
+<small>运行结果看起来很均衡，但实际并不完全如此...</small> <!-- .element: class="fragment" -->
+
+跟`yeild()`语义不一样
+
+---
+
+## Yeild 让位 
+
+- `yield`和`sleep`的主要区别是
+  - yield方法会临时暂停当前正在执行的线程，来让有同样优先级的正在等待的线程有机会执行
+  - 如果没有正在等待的线程，或者所有正在等待的线程的优先级都比较低，那么该线程会继续运行
+  - 执行了yield方法的线程什么时候会继续运行由线程调度器来决定，不同的厂商可能有不同的行为
+  - yield方法不保证当前的线程会暂停或者停止，但是可以保证当前线程在调用yield方法时会放弃CPU。
+
+
+---
+
+## Priority
+
+``` java
+public class SimplePriorities implements Runnable {
+    private int countDown = 5;
+    private volatile double d; // No optimization 后面再解释
+    private int priority;
+
+    public SimplePriorities(int priority) {
+        this.priority = priority;
+    }
+
+    public String toString() {
+        return Thread.currentThread() + ": " + countDown;
+    }
+
+    public void run() {
+        Thread.currentThread().setPriority(priority);
+        while (true) {
+            // An expensive, interruptable operation:
+            for (int i = 1; i < 100000; i++) {
+                d += (Math.PI + Math.E) / (double) i;
+                if (i % 1000 == 0)
+                    Thread.yield();
+            }
+            System.out.println(this);
+            if (--countDown == 0) return;
+        }
+    }
+
+    public static void main(String[] args) {
+        ExecutorService exec = Executors.newCachedThreadPool();
+        for (int i = 0; i < 5; i++)
+            exec.execute(
+                    new SimplePriorities(Thread.MIN_PRIORITY));
+        exec.execute(
+                new SimplePriorities(Thread.MAX_PRIORITY));
+        exec.shutdown();
+    }
+}
+```
+
+改变线程优先级这件事可以做，但尽量不要做<!-- .element: class="fragment" -->
+
+---
+
+
+## Deamon 线程
+
+``` java
+public class SimpleDaemons implements Runnable {
+    public void run() {
+        try {
+            while (true) {
+                TimeUnit.MILLISECONDS.sleep(100);
+                print(Thread.currentThread() + " " + this);
+            }
+        } catch (InterruptedException e) {
+            print("sleep() interrupted");
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        for (int i = 0; i < 10; i++) {
+            Thread daemon = new Thread(new SimpleDaemons());
+            daemon.setDaemon(true); // Must call before start()
+            daemon.start();
+        }
+        print("All daemons started");
+        TimeUnit.MILLISECONDS.sleep(99);
+    }
+}
+```
+
+后台运行线程，当所有非后台线程结束时，应用退出，所有Deamon线程被杀😢
+
+---
+
+## 小结一下
+
+Java关于线程编程的抽象
+
+
+`Thread`对象像是运载火箭，`Runnable`的实现对象就是一个荷载（payload）
+
+
+Runnable/Callable --> Task <!-- .element: class="fragment" -->
+
+Thread --> let tasks go <!-- .element: class="fragment" -->
+
+
+---
+
+## 中级篇
+
+
+---
+
+## Join
+
+``` java
+class Sleeper extends Thread {
+    private int duration;
+
+    public Sleeper(String name, int sleepTime) {
+        super(name);
+        duration = sleepTime;
+        start();
+    }
+
+    public void run() {
+        try {
+            sleep(duration);
+        } catch (InterruptedException e) {
+            print(getName() + " was interrupted. " +
+                    "isInterrupted(): " + isInterrupted());
+            return;
+        }
+        print(getName() + " has awakened");
+    }
+}
+
+class Joiner extends Thread {
+    private Sleeper sleeper;
+
+    public Joiner(String name, Sleeper sleeper) {
+        super(name);
+        this.sleeper = sleeper;
+        start();
+    }
+
+    public void run() {
+        try {
+            sleeper.join();
+        } catch (InterruptedException e) {
+            print("Interrupted");
+        }
+        print(getName() + " join completed");
+    }
+}
+
+public class Joining {
+    public static void main(String[] args) {
+        Sleeper
+                sleepy = new Sleeper("Sleepy", 1500),
+                grumpy = new Sleeper("Grumpy", 1500);
+        Joiner
+                dopey = new Joiner("Dopey", sleepy),
+                doc = new Joiner("Doc", grumpy);
+        grumpy.interrupt();
+    }
+}
+```
+
+---
+
+## Uncaught Exceptions
+
+```java
+public class ExceptionThread implements Runnable {
+    public void run() {
+        throw new RuntimeException();
+    }
+
+    public static void main(String[] args) {
+        ExecutorService exec = Executors.newCachedThreadPool();
+        exec.execute(new ExceptionThread());
+    }
+}
+
+public class NaiveExceptionHandling {
+    public static void main(String[] args) {
+        try {
+            ExecutorService exec =
+                    Executors.newCachedThreadPool();
+            exec.execute(new ExceptionThread());
+        } catch (RuntimeException ue) {
+            // This statement will NOT execute!
+            System.out.println("Exception has been handled!");
+        }
+    }
+}
+```
+
+```
+Exception in thread "pool-1-thread-1" java.lang.RuntimeException
+	at concurrency.ExceptionThread.run(ExceptionThread.java:7)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+```
+
+---
+
+UncaughtExceptionHandler
+
+```java
+class ExceptionThread2 implements Runnable {
+    public void run() {
+        Thread t = Thread.currentThread();
+        System.out.println("run() by " + t);
+        System.out.println(
+                "eh = " + t.getUncaughtExceptionHandler());
+        throw new RuntimeException();
+    }
+}
+
+class MyUncaughtExceptionHandler implements
+        Thread.UncaughtExceptionHandler {
+    public void uncaughtException(Thread t, Throwable e) {
+        System.out.println("caught " + e);
+    }
+}
+
+class HandlerThreadFactory implements ThreadFactory {
+    public Thread newThread(Runnable r) {
+        System.out.println(this + " creating new Thread");
+        Thread t = new Thread(r);
+        System.out.println("created " + t);
+        t.setUncaughtExceptionHandler(
+                new MyUncaughtExceptionHandler());
+        System.out.println(
+                "eh = " + t.getUncaughtExceptionHandler());
+        return t;
+    }
+}
+
+public class CaptureUncaughtException {
+    public static void main(String[] args) {
+        ExecutorService exec = Executors.newCachedThreadPool(
+                new HandlerThreadFactory());
+        exec.execute(new ExceptionThread2());
+        exec.shutdown();
+    }
+}
+```
+
+---
+
+## 或者简单一点
+
+``` java
+public class SettingDefaultHandler {
+    public static void main(String[] args) {
+        Thread.setDefaultUncaughtExceptionHandler(
+                new MyUncaughtExceptionHandler());
+        ExecutorService exec = Executors.newCachedThreadPool();
+        exec.execute(new ExceptionThread());
+    }
+}
+```
+
+---
+
+## 资源共享问题
+
+一个葫芦娃在战场上可以随意走，多个葫芦娃在战场上是随意走，那就会撞头。
+
+因为一个空间位置，是不能共享的。
+
+---
+
+## 示例
+
+EvenGenerator
+
+``` java
+public abstract class IntGenerator {
+    private volatile boolean canceled = false;
+
+    public abstract int next();
+
+    // Allow this to be canceled:
+    public void cancel() {
+        canceled = true;
+    }
+
+    public boolean isCanceled() {
+        return canceled;
+    }
+}
+
+public class EvenGenerator extends IntGenerator {
+    private int currentEvenValue = 0;
+
+    public int next() {
+        ++currentEvenValue; // Danger point here!
+        ++currentEvenValue;
+        return currentEvenValue;
+    }
+}
+```
+
+---
+
+EvenChecker
+
+``` java
+
+public class EvenChecker implements Runnable {
+    private IntGenerator generator;
+    private final int id;
+
+    public EvenChecker(IntGenerator g, int ident) {
+        generator = g;
+        id = ident;
+    }
+
+    public void run() {
+        while (!generator.isCanceled()) {
+            int val = generator.next();
+            if (val % 2 != 0) {
+                System.out.println(val + " not even!");
+                generator.cancel(); // Cancels all EvenCheckers
+            }
+        }
+    }
+
+    // Test any type of IntGenerator:
+    public static void test(IntGenerator gp, int count) {
+        System.out.println("Press Control-C to exit");
+        ExecutorService exec = Executors.newCachedThreadPool();
+        for (int i = 0; i < count; i++)
+            exec.execute(new EvenChecker(gp, i));
+        exec.shutdown();
+    }
+
+    // Default value for count:
+    public static void test(IntGenerator gp) {
+        test(gp, 10);
+    }
+
+    public static void main(String[] args) {
+        EvenChecker.test(new EvenGenerator());
+    }
+
+}
+
+```
+
+---
+
+## 解决方法
+
+对资源加锁，使得对资源的访问顺序化，确保在某一时刻只有一个任务在使用共享资源（使其互斥）
+
+Mutual Exclusion （Mutex）
+
+
+---
+
+## Synchronized
+
+``` java
+public class
+SynchronizedEvenGenerator extends IntGenerator {
+    private int currentEvenValue = 0;
+
+    public synchronized int next() {
+        ++currentEvenValue;
+        Thread.yield(); 
+        ++currentEvenValue;
+        return currentEvenValue;
+    }
+
+    public static void main(String[] args) {
+        EvenChecker.test(new SynchronizedEvenGenerator());
+    }
+}
+```
+
+---
+
+## Lock
+
+``` java
+
+public class MutexEvenGenerator extends IntGenerator {
+    private int currentEvenValue = 0;
+    private Lock lock = new ReentrantLock();
+
+    public int next() {
+        //加锁
+        lock.lock();
+        try {
+            ++currentEvenValue;
+            Thread.yield();
+            ++currentEvenValue;
+            return currentEvenValue;
+        } finally {
+            //一定要用try-catch的finally去释放锁
+            lock.unlock();
+        }
+    }
+
+    public static void main(String[] args) {
+        EvenChecker.test(new MutexEvenGenerator());
+    }
+} 
+```
+
+<small>`ReentrantLock`允许你尝试加锁</small>
+
+<small>`lock.tryLock(2, TimeUnit.SECONDS)`</small>
+
+<small>如果失败做其他处理</small>
+
+
+---
+
+## Critical Sections 临界区
+
+```java
+synchronized(syncObject){
+    //balabala
+}
+```
+
+加锁代码片段
+
+
+---
+
+## 示例
+
+``` java
+
+// Synchronize the entire method:
+class PairManager1 extends PairManager {
+    public synchronized void increment() {
+        p.incrementX();
+        p.incrementY();
+        store(getPair());
+    }
+}
+
+// Use a critical section:
+class PairManager2 extends PairManager {
+    public void increment() {
+        Pair temp;
+        synchronized (this) {
+            p.incrementX();
+            p.incrementY();
+            temp = getPair();
+        }
+        store(temp);
+    }
+}
+```
+
+---
+
+## Lock on Object
+![](http://4.bp.blogspot.com/-kRUcoXzDmAM/T48eQOjNzuI/AAAAAAAAA38/TaU6Eub90uA/s1600/Object-Monitor-Threads.PNG)
+
+---
+
+## Thread local Storage
+
+![](https://i.stack.imgur.com/Dhws6.jpg)
+
+
+--- 
+
+## 示例
+
+``` java
+class Accessor implements Runnable {
+    private final int id;
+
+    public Accessor(int idn) {
+        id = idn;
+    }
+
+    public void run() {
+        while (!Thread.currentThread().isInterrupted()) {
+            ThreadLocalVariableHolder.increment();
+            System.out.println(this);
+            Thread.yield();
+        }
+    }
+
+    public String toString() {
+        return "#" + id + ": " +
+                ThreadLocalVariableHolder.get();
+    }
+}
+
+public class ThreadLocalVariableHolder {
+    private static ThreadLocal<Integer> value =
+            new ThreadLocal<Integer>() {
+                private Random rand = new Random(47);
+
+                protected synchronized Integer initialValue() {
+                    return rand.nextInt(10000);
+                }
+            };
+
+    public static void increment() {
+        value.set(value.get() + 1);
+    }
+
+    public static int get() {
+        return value.get();
+    }
+
+    public static void main(String[] args) throws Exception {
+        ExecutorService exec = Executors.newCachedThreadPool();
+        for (int i = 0; i < 5; i++)
+            exec.execute(new Accessor(i));
+        TimeUnit.SECONDS.sleep(3);  // Run for a while
+        exec.shutdownNow();         // All Accessors will quit
+    }
+}
+```
+
+---
+
+## Cooperation between tasks
+
+
+
+---
+
+让你的葫芦娃们抖动起来！
 
 
 ---
