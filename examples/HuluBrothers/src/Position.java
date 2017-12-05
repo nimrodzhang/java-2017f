@@ -4,6 +4,7 @@ public class Position {
 
 
 
+    @Deprecated
     public Creature getHolder() {
         return holder;
     }

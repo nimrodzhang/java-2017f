@@ -647,7 +647,6 @@ public class HasMapTest {
     theMap.put("Franti, Michael", 98);
     theMap.put("Lennon, John", 88);
     System.out.println(theMap);
-    System.out.println("-------------------------------");
     System.out.println(theMap.get("Korth, Evan"));
     System.out.println(theMap.get("Franti, Michael")); 
   }
