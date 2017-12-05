@@ -133,6 +133,13 @@
 
 ---
 
+## 字节流 vs 字符流
+
+- <font color=red>最佳实践</font>：使用带有Text I/O的字符流
+  + This is preferred for text I/O because it accounts for the “local” character set and supports internationalization with little additional effort.
+
+---
+
 ## 缓冲流
 
 - <font size=6>为了提高数据的传输效率，引入了缓冲流（Buffered Stream）的概念，即为一个流配备一个缓冲区（Buffer），一个缓冲区就是专门用于传送数据的一块内存。</font>
@@ -140,6 +147,13 @@
 - <font size=6>当向一个缓冲流写入数据时，系统将数据发送到缓冲区，而不是直接发送到外部设备。缓冲区自动记录数据，当缓冲区满时，系统将数据全部发送到相应的外部设备。</font>
 
 - <font size=6>当从一个缓冲流中读取数据时，系统实际是从缓冲区中读取数据，当缓冲区为空时，系统就会从相关外部设备自动读取数据，并读取尽可能多的数据填满缓冲区。</font>
+
+---
+
+## 缓冲流
+
+- <font color=red>最佳实践</font>：用Buffered Streams包装字节流或字符流
+ + 例如：BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 
 ---
 
@@ -313,6 +327,16 @@ public class Foo implements java.io.Serializable{
 
 ---
 
+## java.nio.file.* (from jdk7)
+
+- 新类：java.nio.file.Files 工具类
+- 新类：java.nio.file.FileSystem 抽象类
+- 新类：java.nio.file.FileSystems 工厂类
+- 新类：java nio.file.Paths   工具类
+- 新接口：java.nio.file.Path  表示与平台无关的路径
+
+---
+
 ## I/O异常
 
 - java.io.IOException
@@ -321,6 +345,29 @@ public class Foo implements java.io.Serializable{
   + InterruptedIOException
   + ObjectStreamException
   + ...
+
+---
+
+## I/O异常处理
+
+```java
+
+public static void main(String[] args){
+  //code to open file
+  BufferedReader input;
+  try{
+    input = new BufferedReader(new FileReader("test.txt"));
+  }
+  catch(IOException e){
+    System.err.println("Error opening file");
+    return;
+  }
+  //code to read from file
+  //code to close file
+} 
+
+```
+
 
 ---
 
