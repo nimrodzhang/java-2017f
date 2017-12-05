@@ -180,7 +180,7 @@ boolean createNewFile();
 boolean isFile();
 boolean isDirectory();
 String getName();
-Stirng getPath();
+String getPath();
 String[] list();
 boolean delete();
 boolean mkdir();
