@@ -10,7 +10,25 @@
 
 ---
 
+## Java Platform Supporting to GUI
+
+- Java 1.0: AWT APIs
+- Java 1.1: AWT APIs extensive
+- Java 2: JFC - Java Foundation Classes
+  + AWT
+  + Swing
+  + Java2D APIs
+  + Accessibility APIs
+
+---
+
 ## 图形界面设计基础
+
+- AWT: Abstract Window Toolkit，依赖于主平台绘制用户界面组件
+  + java.awt.*
+- Swing: AWT的改良版，在主平台提供的窗口中绘制和管理界面组件
+  + javax. swing.*
+  + java.awt.event.*
 
 ---
 
