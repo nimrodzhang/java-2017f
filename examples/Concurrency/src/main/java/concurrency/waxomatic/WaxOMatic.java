@@ -8,10 +8,8 @@ class Car {
     private boolean waxOn = false;
 
     public synchronized void waxed() {
-
         waxOn = true; // Ready to buff
         notifyAll();
-
     }
 
     public synchronized void buffed() {
@@ -42,7 +40,7 @@ class WaxOn implements Runnable {
     public void run() {
         try {
             while (!Thread.interrupted()) {
-                printnb("Wax On! \n");
+                printnb("Wax On! ");
                 TimeUnit.MILLISECONDS.sleep(200);
                 car.waxed();
                 car.waitForBuffing();
@@ -65,7 +63,7 @@ class WaxOff implements Runnable {
         try {
             while (!Thread.interrupted()) {
                 car.waitForWaxing();
-                printnb("Wax Off! \n");
+                printnb("Wax Off! ");
                 TimeUnit.MILLISECONDS.sleep(200);
                 car.buffed();
             }
@@ -82,7 +80,6 @@ public class WaxOMatic {
         ExecutorService exec = Executors.newCachedThreadPool();
         exec.execute(new WaxOff(car));
         exec.execute(new WaxOn(car));
-
         TimeUnit.SECONDS.sleep(5); // Run for a while...
         exec.shutdownNow(); // Interrupt all tasks
     }
